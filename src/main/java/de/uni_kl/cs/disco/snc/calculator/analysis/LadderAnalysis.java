@@ -17,7 +17,7 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,6 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.network.Flow;
+import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.AdditiveComposition;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
@@ -34,7 +38,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.SymbolicFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.UnitaryMinus;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.BFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.scaledFunction;
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
 import de.uni_kl.cs.disco.utils.SetUtils;
 
 /**
@@ -75,7 +78,7 @@ public class LadderAnalysis extends AbstractAnalysis {
      * performance bounds are given in {
      * @Arrival}-representation.
      */
-    public LadderAnalysis(Network nw, Map<Integer, Vertex> vertices, Map<Integer, Flow> flows, int flow_of_interest, int end_node, Boundtype boundtype) {
+    public LadderAnalysis(Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int end_node, Boundtype boundtype) {
         super(nw, vertices, flows, flow_of_interest, end_node, boundtype);
     }
 

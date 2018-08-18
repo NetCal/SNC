@@ -22,8 +22,8 @@ package de.uni_kl.cs.disco.snc.calculator.optimization;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.uni_kl.cs.disco.snc.calculator.network.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.calculator.network.AbstractAnalysis.Boundtype;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis.Boundtype;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Hoelder;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;

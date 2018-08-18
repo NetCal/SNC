@@ -17,10 +17,14 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 import java.util.Map;
 
+import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.network.Flow;
+import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
 
@@ -44,9 +48,9 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  */
 public abstract class AbstractAnalysis implements Analyzer {
 
-    protected Map<Integer, Vertex> vertices;
+    protected Map<Integer,Vertex> vertices;
 
-    protected Map<Integer, Flow> flows;
+    protected Map<Integer,Flow> flows;
 	
     protected int flow_of_interest;
 

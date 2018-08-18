@@ -20,10 +20,10 @@
 package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
-import de.uni_kl.cs.disco.snc.calculator.network.ConvolutionState;
+import de.uni_kl.cs.disco.snc.calculator.analysis.ConvolutionState;
+import de.uni_kl.cs.disco.snc.calculator.analysis.SimpleEndToEndConvolutor;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
-import de.uni_kl.cs.disco.snc.calculator.network.SimpleEndToEndConvolutor;
 
 import java.util.List;
 

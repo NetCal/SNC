@@ -17,18 +17,18 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.exceptions;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 /**
  *
  * @author Sebastian Henningsen
  */
-public class NetworkActionException extends RuntimeException {
-    public NetworkActionException(Exception e) {
+public class AnalysisException extends RuntimeException {
+    public AnalysisException(Exception e) {
         super(e);
     }
     
-    public NetworkActionException(String message) {
+    public AnalysisException(String message) {
         super(message);
     }
 }

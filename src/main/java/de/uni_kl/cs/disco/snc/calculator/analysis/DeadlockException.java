@@ -17,7 +17,7 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 /**
  * This exception is thrown by the {@link Analysis} class if the

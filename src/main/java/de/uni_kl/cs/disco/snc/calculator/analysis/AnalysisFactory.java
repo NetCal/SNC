@@ -17,11 +17,13 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 import java.util.Map;
 
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
+import de.uni_kl.cs.disco.snc.calculator.network.Flow;
+import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 
 /**
  *
@@ -29,7 +31,7 @@ import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
  */
 public class AnalysisFactory {
     
-    public static Analyzer getAnalyzer(AnalysisType type, Network nw, Map<Integer, Vertex> vertices, Map<Integer, Flow> flows, int flow_of_interest, int vertex_of_interest, AbstractAnalysis.Boundtype boundtype) {
+    public static Analyzer getAnalyzer(AnalysisType type, Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int vertex_of_interest, AbstractAnalysis.Boundtype boundtype) {
         switch(type) {
             case SIMPLE_ANA:
                 return new SimpleAnalysis(nw, vertices, flows, flow_of_interest, vertex_of_interest, boundtype);

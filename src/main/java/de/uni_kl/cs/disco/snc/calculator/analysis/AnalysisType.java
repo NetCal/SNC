@@ -17,29 +17,25 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
-
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 /**
  *
  * @author Sebastian Henningsen
  */
-public class ConvolutionState {
+public enum AnalysisType {
+
+    SIMPLE_ANA {
+        @Override
+		public String toString() {
+	            return "Simple Analysis";
+		}
+    },
     
-    private final String operations;
-    private final Arrival arrival;
-    
-    public ConvolutionState(String operations, Arrival arrival) {
-        this.operations = operations;
-        this.arrival = arrival;
-    }
-    
-    public String getOperations() {
-        return operations;
-    }
-    
-    public Arrival getArrival() {
-        return arrival;
+    LADDER_ANA {
+    	@Override
+		public String toString() {
+	    		return "Ladder Analysis";
+	    }
     }
 }

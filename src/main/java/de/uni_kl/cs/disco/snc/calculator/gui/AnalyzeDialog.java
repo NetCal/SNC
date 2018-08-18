@@ -27,12 +27,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
-import de.uni_kl.cs.disco.snc.calculator.network.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.calculator.network.AnalysisType;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
 
 /**
  * A dialog to poll the user for input to compute a symbolic bound for a {@Network}

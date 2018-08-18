@@ -45,7 +45,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.EBBSigma;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ExponentialSigma;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.StationaryTBSigma;
 import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 /**
  * This class provides several methods to construct and change a network

@@ -17,16 +17,29 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
 
 /**
  *
  * @author Sebastian Henningsen
  */
-public interface Analyzer {
-
-    public abstract Arrival analyze() throws ArrivalNotAvailableException, DeadlockException, BadInitializationException;
+public class ConvolutionState {
+    
+    private final String operations;
+    private final Arrival arrival;
+    
+    public ConvolutionState(String operations, Arrival arrival) {
+        this.operations = operations;
+        this.arrival = arrival;
+    }
+    
+    public String getOperations() {
+        return operations;
+    }
+    
+    public Arrival getArrival() {
+        return arrival;
+    }
 }

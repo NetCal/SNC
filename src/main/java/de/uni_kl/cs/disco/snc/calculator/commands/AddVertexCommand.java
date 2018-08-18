@@ -21,9 +21,9 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServiceFactory;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 /**
  * Add a {@link Vertex} with given properties to the target network.

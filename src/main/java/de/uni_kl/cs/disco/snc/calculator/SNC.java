@@ -31,17 +31,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisFactory;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
+import de.uni_kl.cs.disco.snc.calculator.analysis.Analyzer;
+import de.uni_kl.cs.disco.snc.calculator.analysis.DeadlockException;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddVertexCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.Command;
 import de.uni_kl.cs.disco.snc.calculator.commands.ConvoluteVerticesCommand;
 import de.uni_kl.cs.disco.snc.calculator.gui.MainWindow;
-import de.uni_kl.cs.disco.snc.calculator.network.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.calculator.network.AnalysisFactory;
-import de.uni_kl.cs.disco.snc.calculator.network.AnalysisType;
-import de.uni_kl.cs.disco.snc.calculator.network.Analyzer;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
-import de.uni_kl.cs.disco.snc.calculator.network.DeadlockException;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.NetworkListener;
@@ -58,7 +59,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchExceptio
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServerOverloadException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ConstantFunction;
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
 import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
 
 /**

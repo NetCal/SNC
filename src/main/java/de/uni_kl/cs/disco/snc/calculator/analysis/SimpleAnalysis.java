@@ -17,11 +17,15 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.network;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 import java.util.Map;
 import java.util.Stack;
 
+import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.network.Flow;
+import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.AdditiveComposition;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
@@ -78,7 +82,7 @@ public class SimpleAnalysis extends AbstractAnalysis {
 	 * calculated. Note: All performance bounds are given in 
 	 * {@Arrival}-representation.
 	 */
-	public SimpleAnalysis(Network nw, Map<Integer, Vertex> vertices, Map<Integer, Flow> flows, int flow_of_interest, int vertex_of_interest,  Boundtype boundtype){
+	public SimpleAnalysis(Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int vertex_of_interest,  Boundtype boundtype){
 		super(nw, vertices, flows, flow_of_interest, vertex_of_interest, boundtype);
 		analyzableVertices = new Stack<>();
 	}

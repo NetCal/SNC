@@ -25,7 +25,6 @@ import java.util.List;
 
 import de.uni_kl.cs.disco.snc.calculator.gui.Displayable;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 /**
  * Describes a flow through the network and gives it an initial arrival. The

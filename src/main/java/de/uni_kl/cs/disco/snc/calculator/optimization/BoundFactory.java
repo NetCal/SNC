@@ -19,8 +19,8 @@
 
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
 
 /**
  * A factory for bound which can be optimized. The goal is to add an extra layer

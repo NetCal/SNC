@@ -19,8 +19,8 @@
 
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
-import de.uni_kl.cs.disco.snc.calculator.network.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.exceptions.AnalysisException;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 
 /**
  * A factory to abstract from different implementations of the @link Optimizer interface.

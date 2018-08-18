@@ -21,8 +21,8 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 import java.util.List;
 

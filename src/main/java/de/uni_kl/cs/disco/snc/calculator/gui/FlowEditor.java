@@ -40,12 +40,12 @@ import javax.swing.JTextField;
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ArrivalFactory;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ArrivalType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 /**
  * Dialog for editing a flow.

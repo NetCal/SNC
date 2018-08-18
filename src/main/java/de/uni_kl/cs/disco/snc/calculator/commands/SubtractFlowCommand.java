@@ -21,7 +21,7 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 
 /**
  * Computes the left-over-service at the given vertex

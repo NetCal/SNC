@@ -30,8 +30,8 @@ import javax.swing.JTextField;
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddVertexCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.Command;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServiceType;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
 
 /**
  * A dialog to get input from the user in order to add a vertex to a network.

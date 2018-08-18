@@ -23,19 +23,12 @@ package de.uni_kl.cs.disco.snc.calculator.network;
  *
  * @author Sebastian Henningsen
  */
-public enum AnalysisType {
-
-    SIMPLE_ANA {
-        @Override
-		public String toString() {
-	            return "Simple Analysis";
-		}
-    },
+public class NetworkActionException extends RuntimeException {
+    public NetworkActionException(Exception e) {
+        super(e);
+    }
     
-    LADDER_ANA {
-    	@Override
-		public String toString() {
-	    		return "Ladder Analysis";
-	    }
+    public NetworkActionException(String message) {
+        super(message);
     }
 }

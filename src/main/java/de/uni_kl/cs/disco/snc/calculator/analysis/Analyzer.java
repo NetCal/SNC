@@ -17,18 +17,17 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.exceptions;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
+
+import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
+import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationException;
 
 /**
  *
  * @author Sebastian Henningsen
  */
-public class AnalysisException extends RuntimeException {
-    public AnalysisException(Exception e) {
-        super(e);
-    }
-    
-    public AnalysisException(String message) {
-        super(message);
-    }
+public interface Analyzer {
+
+    public abstract Arrival analyze() throws ArrivalNotAvailableException, DeadlockException, BadInitializationException;
 }

@@ -30,7 +30,7 @@ import de.uni_kl.cs.disco.snc.calculator.commands.RemoveFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.RemoveVertexCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.SubtractFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
-import de.uni_kl.cs.disco.snc.exceptions.NetworkActionException;
+import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 
 /**
  * This static factory serves as collection of all actions corresponding to the {@link ControlPanel}.
