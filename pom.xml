@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <name>DiscoSNC - The Disco Stochastic Network Calculator</name>
+    <description>The Disco Stochastic Network Calculator is a Java tool for the stochastic worst case performance analysis of networks.</description>
+    <url>disco.cs.uni-kl.de/index.php/projects/disco-snc</url>
+
+    <groupId>de.uni_kl.cs.disco</groupId>
+    <artifactId>DiscoSNC</artifactId>
+    <version>2.1.0-SNAPSHOT</version>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Michael Beck</name>
+            <email>MichaelAlexander.Beck@umanitoba.ca</email>
+            <organization>University of Manitoba</organization>
+            <organizationUrl></organizationUrl>
+        </developer>
+        <developer>
+            <name>Sebastian Henningsen</name>
+            <email>sebastian.henningsen@hu-berlin.de</email>
+            <organization>Humboldt University of Berlin</organization>
+            <organizationUrl></organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/NetCal/DiscoSNC.git</connection>
+        <developerConnection>scm:git:ssh://github.com/NetCal/DiscoSNC.git</developerConnection>
+        <url>https://github.com/NetCal/DiscoSNC/tree/v2.5</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>10</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jung</groupId>
+            <artifactId>jung-visualization</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jung</groupId>
+            <artifactId>jung-graph-impl</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+	  <plugins>
+	    <plugin>
+	      <!-- Build an executable JAR -->
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-jar-plugin</artifactId>
+	      <version>3.1.0</version>
+	      <configuration>
+	        <archive>
+	          <manifest>
+	            <addClasspath>true</addClasspath>
+	            <classpathPrefix>lib/</classpathPrefix>
+	            <mainClass>de.uni_kl.cs.disco.snc.calculator.SNC</mainClass>
+	          </manifest>
+	        </archive>
+	      </configuration>
+	    </plugin>
+	  </plugins>
+	</build>
+
+</project>
