@@ -31,13 +31,13 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServiceFactory;
  * @author Sebastian Henningsen
  */
 public class AddVertexCommand implements Command {
+	private final String alias;
+	private final double rate;
+	private final int networkID;
+	private final SNC snc;
 	
-    private final String alias;
-    double rate;
-    int networkID;
-    SNC snc;
-    boolean success;
-    int vertexID;
+	private int vertexID;
+	private boolean success;
     
     /**
      * Creates a new Command to add a vertex
@@ -53,19 +53,23 @@ public class AddVertexCommand implements Command {
         this.rate = rate;
         this.networkID = networkID;
         this.snc = snc;
-        this.success = false;
+        
         this.vertexID = -1;
+        this.success = false;
     }
     
     @Override
     public void execute() {
-	Network nw = snc.getCurrentNetwork();
+    	Network nw = snc.getCurrentNetwork();
+    	
         try {
             vertexID = nw.addVertex(ServiceFactory.buildConstantRate(-rate), alias).getID();
         } catch (BadInitializationException ex) {
+        	vertexID = -1;
+        	success = false;
             throw new NetworkActionException(ex);
         }
-		// TODO Why is this?
+		// TODO Why is this? In the try block or after? See AddFlowCommand
 		snc.getCurrentNetwork().getVertex(vertexID).getService().getServicedependencies().clear();
 	
 		success = true;

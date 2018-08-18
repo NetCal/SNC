@@ -25,10 +25,10 @@ import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 
 /**
  * Computes the left-over-service at the given vertex
+ * 
  * @author Sebastian Henningsen
  */
 public class SubtractFlowCommand implements Command {
-    
     private final int vertexID;
     private final int networkID;
     private final SNC snc;

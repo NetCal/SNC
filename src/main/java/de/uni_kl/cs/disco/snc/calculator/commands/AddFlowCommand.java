@@ -21,6 +21,7 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
+import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 
@@ -32,15 +33,15 @@ import java.util.List;
  * @author Sebastian Henningsen
  */
 public class AddFlowCommand implements Command {
+	private final String alias;
+	private final Arrival arrival;
+	private final List<Integer> route;
+	private final List<Integer> priorities;
+	private final int networkID;
+	private final SNC snc;
 	
-    private final String alias;
-    int networkID;
-    SNC snc;
-    boolean success;
-    int flowID;
-    Arrival arrival;
-    List<Integer> route;
-    List<Integer> priorities;
+	private int flowID;
+	private boolean success;
     
     /**
      * Creates a new AddFlowCommand 
@@ -54,25 +55,31 @@ public class AddFlowCommand implements Command {
      */
     public AddFlowCommand(String alias, Arrival arrival, List<Integer> route, List<Integer> priorities, int networkID, SNC snc) {
         this.alias = alias != null ? alias : "";
-        this.networkID = networkID;
-        this.snc = snc;
-        this.success = false;
 		this.arrival = arrival;
 		this.route = route;
 		this.priorities = priorities;
+		this.networkID = networkID;
+		this.snc = snc;
+
+        this.flowID = -1;
+		this.success = false;
     }
     
     @Override
     public void execute() {
+    	Network nw = snc.getCurrentNetwork();
+    	
 		try {
 		    flowID = snc.getCurrentNetwork().addFlow(arrival, route, priorities, alias);
-		    // TODO: Why is this?
-		    snc.getCurrentNetwork().getFlow(flowID).getInitialArrival().getArrivaldependencies().clear();
-	
+			// TODO Why is this? In the try block or after? See AddVertexCommand
+		    nw.getFlow(flowID).getInitialArrival().getArrivaldependencies().clear();
 		} catch (ArrivalNotAvailableException e) {
+			flowID = -1;
 			success = false;
 	        throw new NetworkActionException("Error while adding flow " + this.alias + ": " + e.getMessage());
 		}
+		
+		success = true;
     }
 
     @Override

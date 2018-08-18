@@ -27,12 +27,11 @@ import de.uni_kl.cs.disco.snc.calculator.SNC;
  * @author Sebastian Henningsen
  */
 public class ConvoluteVerticesCommand implements Command {
-     
-    int vertex1ID;
-    int vertex2ID;
-    int networkID;
-    int flowID;
-    SNC snc;
+	private final int vertex1ID;
+	private final int vertex2ID;
+	private final int flowID;
+	private final int networkID;
+	private final SNC snc;
     
     /**
      * Creates a new command to convolute two vertices, the action is relayed to the
@@ -47,8 +46,8 @@ public class ConvoluteVerticesCommand implements Command {
     public ConvoluteVerticesCommand(int vertex1ID, int vertex2ID, int flowID, int networkID, SNC snc) {
         this.vertex1ID = vertex1ID;
         this.vertex2ID = vertex2ID;
-        this.networkID = networkID;
         this.flowID = flowID;
+        this.networkID = networkID;
         this.snc = snc;
     }
     

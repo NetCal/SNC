@@ -28,9 +28,9 @@ import de.uni_kl.cs.disco.snc.exceptions.NotImplementedException;
  * @author Sebastian Henningsen
  */
 public class RemoveFlowCommand implements Command {
-    int networkID;
-    SNC snc;
-    int flowID;
+	private final int flowID;
+	private final int networkID;
+	private final SNC snc;
     
     /**
      * Constructs a new Command to remove a flow from a network.
@@ -40,9 +40,9 @@ public class RemoveFlowCommand implements Command {
      * @param snc The overall controller
      */
     public RemoveFlowCommand(int flowID, int networkID, SNC snc) {
+    	this.flowID = flowID;
         this.networkID = networkID;
         this.snc = snc;
-        this.flowID = flowID;
     }
     
     @Override

@@ -28,9 +28,9 @@ import de.uni_kl.cs.disco.snc.exceptions.NotImplementedException;
  * @author Sebastian Henningsen
  */
 public class RemoveVertexCommand implements Command {
-    int networkID;
-    SNC snc;
-    int vertexID;
+	private final int vertexID;
+	private final int networkID;
+	private final SNC snc;
     
     /**
      * Constructs a new command to remove a vertex from a network.
@@ -40,9 +40,9 @@ public class RemoveVertexCommand implements Command {
      * @param snc The overall controller
      */
     public RemoveVertexCommand(int vertexID, int networkID, SNC snc) {
+    	this.vertexID = vertexID;
         this.networkID = networkID;
         this.snc = snc;
-        this.vertexID = vertexID;
     }
     
     @Override

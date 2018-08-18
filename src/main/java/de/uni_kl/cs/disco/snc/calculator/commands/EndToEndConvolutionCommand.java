@@ -34,17 +34,17 @@ import java.util.List;
  * @author Sebastian Henningsen
  */
 public class EndToEndConvolutionCommand implements Command {
-     
-    int vertex1ID, vertex2ID;
-    Network nw;
-    SNC snc;
-    Flow flowOfInterest;
+	private final int vertex1ID, vertex2ID;
+	private final Flow flowOfInterest;
+	private final Network nw;
+	private final SNC snc;
     
     public EndToEndConvolutionCommand(int vertex1ID, int vertex2ID, int flowID, int networkID, SNC snc) {
-        this.nw = snc.getCurrentNetwork();
         this.vertex1ID = vertex1ID;
         this.vertex2ID = vertex2ID;
+        this.nw = snc.getCurrentNetwork();
         this.flowOfInterest = nw.getFlow(flowID);
+        this.snc = snc;
     }
     
     @Override
