@@ -28,7 +28,7 @@ import java.util.Set;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.BFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ConstantFunction;
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.scaledFunction;
+import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ScaledFunction;
 import de.uni_kl.cs.disco.utils.SetUtils;
 
 /**
@@ -271,7 +271,7 @@ public class Arrival implements Serializable {
 		if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() || !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
 			Hoelder hoelder = nw.createHoelder();
 			SymbolicFunction givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma(),hoelder),new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder)));
-			SymbolicFunction givenrho = new scaledFunction(arrival.getRho(),hoelder, false);
+			SymbolicFunction givenrho = new ScaledFunction(arrival.getRho(),hoelder, false);
 			output = new Arrival(givensigma, givenrho, nw);
 			//System.out.println("Dependent Case Output calculated");
 		}

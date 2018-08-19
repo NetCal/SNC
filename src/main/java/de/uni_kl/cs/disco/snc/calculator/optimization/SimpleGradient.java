@@ -53,6 +53,7 @@ public class SimpleGradient extends AbstractOptimizer {
 
     /**
      * Creates an instance of this class, delegates the construction to @link AbstractOptimizer.
+     * 
      * @param bound
      * @param boundtype
      */
@@ -225,8 +226,6 @@ public class SimpleGradient extends AbstractOptimizer {
 		
 		// Initializes theta
 		double max_theta = input.getThetastar();
-		double sigmapart;
-		double rhopart;
 		double theta = thetagranularity;
 		int changed_hoelder = Integer.MAX_VALUE;
 		boolean improved = true;
@@ -511,7 +510,6 @@ public class SimpleGradient extends AbstractOptimizer {
 				result = 0;
 				break;
 		}
-		
 		return result;
 	}
 
@@ -834,7 +832,6 @@ public class SimpleGradient extends AbstractOptimizer {
 				result = 0;
 				break;
 		}
-		
 		return result;
 	}
 }

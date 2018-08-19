@@ -46,32 +46,31 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @see BadInitializationException
  */
 public class PoissonRho implements SymbolicFunction {
-	 
-	//Members
-
 	private static final long serialVersionUID = -3592398716087106351L;
+	
 	private SymbolicFunction rho;
 	private Map<Integer, Hoelder> rhoParameters;
 	private double mu;	
-
-	//Constructors
 	
 	/**
 	 * Constructs an <code>PoissonRho</code> entity.
+	 * 
 	 * @param mu the the intensity of the underlying Poisson process
 	 * @param rho the MGF bound on the increment
 	 */
 	public PoissonRho(SymbolicFunction rho, double mu){
 		this.rho = rho;
-		this.mu= mu;
-		this.rhoParameters= rho.getParameters();
+		this.mu = mu;
+		this.rhoParameters = rho.getParameters();
 	}
 
 	/**
 	 * Calculates the value of the rho-part of the arrival with
 	 * exponentially distributed interarrival times.
+	 * 
      * @param theta
-	 * @param parameters its first parameter must be theta. 
+	 * @param parameters its first parameter must be theta.
+	 *  
      * @throws de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException 
      * @throws de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException 
 	 */
@@ -79,9 +78,10 @@ public class PoissonRho implements SymbolicFunction {
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 
-		//Checks for a mismatch in number of given and needed parameters
-		if(parameters.size() != rhoParameters.size())
+		// Checks for a mismatch in number of given and needed parameters
+		if(parameters.size() != rhoParameters.size()) {
 			throw new ParameterMismatchException("Number of parameters does not match for atom functions (Poisson)");
+		}
 			
 		return mu/theta*(Math.exp(rho.getValue(theta, parameters)*theta) - 1 );
 	}
@@ -90,8 +90,6 @@ public class PoissonRho implements SymbolicFunction {
 		String output = "Poi_arr("+rho.toString()+")";
 		return output;
 	}
-		
-	//Getter and Setter
 	
 	@Override
 	public double getmaxTheta() {

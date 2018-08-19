@@ -45,13 +45,9 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @see BadInitializationException
  */
 public class ExponentialSigma implements SymbolicFunction{
-	
-	//Members
-	
 	private static final long serialVersionUID = -5146196878977702835L;
-	private double lambda;
 	
-	//Constructor
+	private double lambda;
 	
 	public ExponentialSigma(double lambda) throws BadInitializationException{
 		if(lambda < 0 || lambda == 0){
@@ -59,8 +55,6 @@ public class ExponentialSigma implements SymbolicFunction{
 		}
 		this.lambda = lambda;
 	}
-
-	//Methods
 	
 	/**
 	 * Calculates the value of the exponential increment in the 
@@ -77,12 +71,12 @@ public class ExponentialSigma implements SymbolicFunction{
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException {
 		
-		//Checks if only one parameter is given
+		// Checks if only one parameter is given
 		if(parameters.size() != 0){
 			throw new ParameterMismatchException("exponentialsigma needs exactly one parameter");
 		}
 		
-		//Checks if theta is smaller lambda
+		// Checks if theta is smaller lambda
 		if(theta >= lambda){
 			throw new ThetaOutOfBoundException("theta ("+theta+") larger lambda ("+lambda+") in exponential distribution");
 		}
@@ -101,8 +95,6 @@ public class ExponentialSigma implements SymbolicFunction{
 		String output = "exp_arr("+Double.toString(lambda)+")";
 		return output;
 	}
-	
-	//Getter and Setter
 	
 	@Override
 	public double getmaxTheta() {

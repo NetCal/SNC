@@ -37,7 +37,7 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Service;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.SymbolicFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.UnitaryMinus;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.BFunction;
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.scaledFunction;
+import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ScaledFunction;
 import de.uni_kl.cs.disco.utils.SetUtils;
 
 /**

@@ -38,8 +38,8 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.SymbolicFunction;
  * @see SymbolicFunction
  */
 public class ConstantFunction implements SymbolicFunction {
-	
 	private static final long serialVersionUID = 1154257189928764896L;
+	
 	private final double rate;
 	private final double maxTheta;
 	
@@ -51,7 +51,7 @@ public class ConstantFunction implements SymbolicFunction {
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters) throws ParameterMismatchException {
 	    if(!parameters.isEmpty()) {
-		throw new ParameterMismatchException("Constant function has no Hoelder parameters");
+	    	throw new ParameterMismatchException("Constant function has no Hoelder parameters");
 	    }
 	    return rate;
 	}

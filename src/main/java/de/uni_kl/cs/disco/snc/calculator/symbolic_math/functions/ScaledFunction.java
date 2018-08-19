@@ -32,8 +32,8 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * This alters an exisiting {@link SymbolicFunction} (called atom-function
  * in the sense that the theta is scaled by <code>
  * scale_parameter_ID</code>. In expression if <code>f(theta)</code>
- is a theta-dependent function the result of this SymbolicFunction is:
- <br><code>f(theta*scale_parameter_ID)</code>. This is needed for
+ * is a theta-dependent function the result of this SymbolicFunction is:
+ * <br><code>f(theta*scale_parameter_ID)</code>. This is needed for
  * performing the stochastically dependent versions of several other
  * operators, like {@link AddedFunctions} or 
  * {@link MaximumFunction}.
@@ -47,17 +47,14 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @see SymbolicFunction
  * @see BadInitializationException
  */
-public class scaledFunction implements SymbolicFunction {
-	
-	//Members
-	
+public class ScaledFunction implements SymbolicFunction {
 	private static final long serialVersionUID = -8546822282037420484L;
+	
 	private SymbolicFunction original;
 	private Hoelder hoelder;
 	private boolean p_scale;
-	
-	//Constructors
 
+/*
 	/**
 	 * Constructs an <code>scaledFunction</code> entity. If 
 	 * <code>p_scale</code> is set <code>true</code> the 
@@ -72,11 +69,13 @@ public class scaledFunction implements SymbolicFunction {
 	 * @param p_scale wether the first or second part of a Hoelder-
 	 * coefficient should be used for scaling.
 	 */
-	/*public scaledFunction(SymbolicFunction function, boolean p_scale){
+/*
+	public scaledFunction(SymbolicFunction function, boolean p_scale){
 		this.original = function;
 		this.hoelder = Network.createHoelder();
 		this.p_scale = p_scale;
-	}*/
+	}
+*/
 	
 	/**
 	 * Constructs an <code>scaledFunction</code> entity. If 
@@ -91,13 +90,11 @@ public class scaledFunction implements SymbolicFunction {
 	 * @param p_scale wether the first or second part of a Hoelder-
 	 * coefficient should be used for scaling.
 	 */
-	public scaledFunction(SymbolicFunction function, Hoelder hoelder, boolean p_scale){
+	public ScaledFunction(SymbolicFunction function, Hoelder hoelder, boolean p_scale){
 		this.original = function;
 		this.hoelder = hoelder;
 		this.p_scale = p_scale;
 	}
-	
-	//Methods
 	
 	/**
 	 * Calculates the value of the resulting function at theta 
@@ -136,7 +133,6 @@ public class scaledFunction implements SymbolicFunction {
 		}
 		
 		//Scales theta
-		
 		if(p_scale)	theta = theta*parameters.get(hoelder.getHoelderID()).getPValue();
 		else theta = theta*parameters.get(hoelder.getHoelderID()).getQValue();
 
@@ -146,6 +142,7 @@ public class scaledFunction implements SymbolicFunction {
 	/**
 	 * Gives a String representation of the scaled function by<br>
 	 * <code>scaled(f(t),scale_parameter_ID)</code><br>
+	 * 
      * @return 
 	 */
 	@Override
@@ -153,8 +150,6 @@ public class scaledFunction implements SymbolicFunction {
 		if(p_scale)	return "scaled("+original.toString()+","+Integer.toString(hoelder.getHoelderID())+")";
 		else return "scaled("+original.toString()+","+Integer.toString(hoelder.getHoelderID())+",q)";
 	}
-
-	//Getter and Setter
 	
 	@Override
 	public double getmaxTheta() {

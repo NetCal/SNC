@@ -35,7 +35,7 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Service;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.SymbolicFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.BFunction;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ConstantFunction;
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.scaledFunction;
+import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ScaledFunction;
 import de.uni_kl.cs.disco.utils.SetUtils;
 
 /**
@@ -233,7 +233,7 @@ public class SimpleAnalysis extends AbstractAnalysis {
 				SymbolicFunction prep2 = new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder);
 				
 				sigma = new AdditiveComposition(prep1,new BFunction(prep2));
-				rho = new scaledFunction(service.getRho(), hoelder, false);
+				rho = new ScaledFunction(service.getRho(), hoelder, false);
 				System.out.println("Dependent case");
 			}
 			
@@ -255,7 +255,7 @@ public class SimpleAnalysis extends AbstractAnalysis {
 			if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() || !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
 				Hoelder hoelder = nw.createHoelder();
 				givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma(),hoelder),new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder)));
-				givenrho = new scaledFunction(arrival.getRho(),hoelder, false);
+				givenrho = new ScaledFunction(arrival.getRho(),hoelder, false);
 			}
 			
 			//Independent Case

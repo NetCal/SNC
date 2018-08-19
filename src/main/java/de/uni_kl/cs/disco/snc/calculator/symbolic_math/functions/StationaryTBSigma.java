@@ -43,20 +43,16 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * <code>POSITIVE_INFINITY.</code>
  * 
  * @author Michael Beck
+ * 
  * @see FunctionIF
  * @see ArrivalFactory
  */
 public class StationaryTBSigma implements SymbolicFunction {
-
-	//Members
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3048571928799189089L;
-	double bucket;
-	double maxTheta = Double.POSITIVE_INFINITY;
 	
-	//Constructor
+	private double bucket;
+	private double maxTheta = Double.POSITIVE_INFINITY;
+	
 	public StationaryTBSigma(double bucket) throws BadInitializationException{
 		if(!(bucket > 0)){
 			throw new BadInitializationException("Bucket size of arrivals must be positive", bucket);
@@ -109,7 +105,6 @@ public class StationaryTBSigma implements SymbolicFunction {
 		return output;
 	}
 	
-	//Getter and Setter
 	@Override
 	public double getmaxTheta() {
 		return maxTheta;

@@ -50,18 +50,16 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  *
  */
 public class BFunction implements SymbolicFunction {
-	
 	private static final long serialVersionUID = -393050275685989790L;
-	SymbolicFunction exponent;
-	double maxtheta;
-	private Map<Integer, Hoelder> parameters;
 	
-	//Constructor
+	private SymbolicFunction exponent;
+	private double maxtheta;
+	private Map<Integer, Hoelder> parameters;
 	
 	public BFunction(SymbolicFunction exponent){
 		this.exponent = exponent;
-		maxtheta = exponent.getmaxTheta();
 		this.parameters = exponent.getParameters();
+		maxtheta = exponent.getmaxTheta();
 	}
 	
 	/**
@@ -81,7 +79,6 @@ public class BFunction implements SymbolicFunction {
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ServerOverloadException, ParameterMismatchException {
-
 		//Checks for a mismatch in number of given and needed parameters
 		if(parameters.size() != this.parameters.size()){
 			throw new ParameterMismatchException("Number of parameters does not match for atom function (B-Function)");
@@ -90,9 +87,7 @@ public class BFunction implements SymbolicFunction {
 		//Checks if argument in the logarithm is non-positive (see definition of the B-function)
 		if(exponent.getValue(theta, parameters) >= 0){
 			throw new ServerOverloadException("Usage of non-positive argument in log(). Argument:"+Double.toString(1-Math.exp(exponent.getValue(theta, parameters))));
-		}
-		
-		else {
+		} else {
 			return -1/theta*Math.log(1-Math.exp(theta*exponent.getValue(theta, parameters)));
 		}
 	}
@@ -105,13 +100,14 @@ public class BFunction implements SymbolicFunction {
 	 */
 	@Override
 	public String toString(){
+		StringBuffer b_str = new StringBuffer();
 		
-		String output = "B("+exponent.toString()+")";
+		b_str.append("B(");
+		b_str.append(exponent.toString());
+		b_str.append(")");
 		
-		return output;
+		return b_str.toString();
 	}
-
-	//Getter and SetterMaperride
 
     public Map<Integer, Hoelder> getParameters() {
 		return parameters;

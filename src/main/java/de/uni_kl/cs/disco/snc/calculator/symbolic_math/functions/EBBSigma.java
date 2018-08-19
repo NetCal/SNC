@@ -48,14 +48,10 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @see ArrivalFactory
  */
 public class EBBSigma implements SymbolicFunction {
-
-	//Members
-
 	private static final long serialVersionUID = 3048571928799189089L;
-	double decay;
-	double prefactor;
 	
-	//Constructor
+	private double decay;
+	private double prefactor;
 	
 	public EBBSigma(double decay, double prefactor) throws BadInitializationException{
 		if(decay < 0){
@@ -67,8 +63,6 @@ public class EBBSigma implements SymbolicFunction {
 		this.decay = decay;
 		this.prefactor = prefactor;
 	}	
-	
-	//Methods
 
 	/**
 	 * Calculates the value of the resulting EBB-function at theta 
@@ -85,15 +79,13 @@ public class EBBSigma implements SymbolicFunction {
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ServerOverloadException, ParameterMismatchException {
 
-		//Checks for a mismatch of given and needed parameters
+		// Checks for a mismatch of given and needed parameters
 		if(parameters.size() != 0) throw new ParameterMismatchException("EBBFunction has only (modified) theta as parameters.");
 		
-		//Checks if theta is larger the decay-rate (in which case the integral appearing in the conversion theorem is indefinite)
+		// Checks if theta is larger the decay-rate (in which case the integral appearing in the conversion theorem is indefinite)
 		if(theta > decay){
 			throw new ThetaOutOfBoundException("The given theta exceeds the decay-rate of this EBB-arrival. theta: "+theta+". decay-rate: "+decay);
-		}
-		
-		else {
+		} else {
 			return 1/decay*Math.log(prefactor) - 1/theta*Math.log(1 - theta/decay);
 		}
 	}
@@ -104,11 +96,16 @@ public class EBBSigma implements SymbolicFunction {
 	 */
 	@Override
 	public String toString(){
-		String output = "EBB("+decay+","+prefactor+")";
-		return output;
+		StringBuffer ebb_sigma_str = new StringBuffer();
+		
+		ebb_sigma_str.append("EBB(");
+		ebb_sigma_str.append(Double.toString(decay));
+		ebb_sigma_str.append(",");
+		ebb_sigma_str.append(Double.toString(prefactor));
+		ebb_sigma_str.append(")");
+		
+		return ebb_sigma_str.toString();
 	}
-	
-	//Getter and Setter
 	
 	@Override
 	public double getmaxTheta() {
