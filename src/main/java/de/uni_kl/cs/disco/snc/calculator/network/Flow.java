@@ -136,17 +136,13 @@ public class Flow implements Serializable, Displayable {
      * @param vertexID
      */
     public void removeVertex(int vertexID) {
-        while (true) {
-            if (vertices.contains(vertexID)) {
-                int index = vertices.indexOf(vertexID);
-                vertices.remove(index);
-                arrivals.remove(index);
-                priorities.remove(index);
-                if (established_arrivals - 1 == index) {
-                    established_arrivals--;
-                }
-            } else {
-                break;
+        if (vertices.contains(vertexID)) {
+            int index = vertices.indexOf(vertexID);
+            vertices.remove(index);
+            arrivals.remove(index);
+            priorities.remove(index);
+            if (established_arrivals - 1 == index) {
+                established_arrivals--;
             }
         }
     }
