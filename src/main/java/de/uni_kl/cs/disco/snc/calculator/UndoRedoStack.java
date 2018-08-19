@@ -46,7 +46,7 @@ public class UndoRedoStack {
     public void undo() {
         if(!undoStack.empty()) {
             System.out.println("Undoing");
-            Command c = (Command)undoStack.pop();
+            Command c = undoStack.pop();
             redoStack.add(c);
             c.undo();
         }
@@ -55,7 +55,7 @@ public class UndoRedoStack {
     public void redo() {
         if(!redoStack.empty()) {
             System.out.println("Redoing");
-            Command c = (Command)redoStack.pop();
+            Command c = redoStack.pop();
             undoStack.add(c);
             c.execute();
         }
