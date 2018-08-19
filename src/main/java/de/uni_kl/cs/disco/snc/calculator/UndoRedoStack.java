@@ -30,12 +30,12 @@ import de.uni_kl.cs.disco.snc.calculator.commands.Command;
  * @author Sebastian Henningsen
  */
 public class UndoRedoStack {
-    private final Stack undoStack;
-    private final Stack redoStack;
+    private final Stack<Command> undoStack;
+    private final Stack<Command> redoStack;
     
     public UndoRedoStack() {
-        undoStack = new Stack();
-        redoStack = new Stack();
+        undoStack = new Stack<Command>();
+        redoStack = new Stack<Command>();
     }
     
     public void insertIntoStack(Command c) {
