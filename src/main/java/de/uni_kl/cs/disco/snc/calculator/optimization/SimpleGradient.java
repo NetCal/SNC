@@ -22,8 +22,7 @@ package de.uni_kl.cs.disco.snc.calculator.optimization;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis.Boundtype;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Hoelder;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
@@ -48,7 +47,11 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  */
 public class SimpleGradient extends AbstractOptimizer {
 	enum Change{
-		THETA_DEC, THETA_INC, HOELDER_P, HOELDER_Q, NOTHING
+		THETA_DEC, 
+		THETA_INC, 
+		HOELDER_P, 
+		HOELDER_Q, 
+		NOTHING
 	};
 
     /**
@@ -57,7 +60,7 @@ public class SimpleGradient extends AbstractOptimizer {
      * @param bound
      * @param boundtype
      */
-    public SimpleGradient(Optimizable bound, AbstractAnalysis.Boundtype boundtype) {
+    public SimpleGradient(Optimizable bound, BoundType boundtype) {
 		super(bound, boundtype);
 	}
         
@@ -205,7 +208,7 @@ public class SimpleGradient extends AbstractOptimizer {
 	}
         
 	@Override
-	public double Bound(Arrival input, Boundtype boundtype, double bound, double thetagranularity, double hoeldergranularity)
+	public double Bound(Arrival input, BoundType boundtype, double bound, double thetagranularity, double hoeldergranularity)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 		
 		double result;
@@ -216,7 +219,7 @@ public class SimpleGradient extends AbstractOptimizer {
 		allparameters.putAll(input.getRho().getParameters());
 			
 		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
-		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
+		if(boundtype == BoundType.BACKLOG){
                     allparameters.get(allparameters.size()).setPValue(bound);
                     allparameters.remove(allparameters.size());
 		}
@@ -514,7 +517,7 @@ public class SimpleGradient extends AbstractOptimizer {
 	}
 
 	@Override
-	public double ReverseBound(Arrival input, Boundtype boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
+	public double ReverseBound(Arrival input, BoundType boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 		double result;
 		
 		// Initializes the list of Hoelder-Parameters...
@@ -523,7 +526,7 @@ public class SimpleGradient extends AbstractOptimizer {
 		allparameters.putAll(input.getRho().getParameters());
 			
 		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
-		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
+		if(boundtype == BoundType.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(0);
 			allparameters.remove(allparameters.size());
 		}

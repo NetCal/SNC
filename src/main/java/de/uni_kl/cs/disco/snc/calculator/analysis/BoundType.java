@@ -17,11 +17,10 @@
  * our work otherwise. We would also like to hear of any fixes or useful
  */
 
-package de.uni_kl.cs.disco.snc.calculator.optimization;
+package de.uni_kl.cs.disco.snc.calculator.analysis;
 
 /**
- * A list of available bounds, somewhat redundant to @link analysis.BoundType.
- * These two enums will be merged in the future
+ * A list of available bounds.
  * 
  * @author Sebastian Henningsen
  */

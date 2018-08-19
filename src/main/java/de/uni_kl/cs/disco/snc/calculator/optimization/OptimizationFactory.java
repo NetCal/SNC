@@ -19,7 +19,7 @@
 
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 
 /**
@@ -38,7 +38,7 @@ public class OptimizationFactory {
      * 
      * @return A concrete instance of an optimizer, which is chosen w.r.t. the passed OptimizationType enum.
      */
-    public static Optimizer getOptimizer(Optimizable bound, AbstractAnalysis.Boundtype boundtype, OptimizationType type) {
+    public static Optimizer getOptimizer(Optimizable bound, BoundType boundtype, OptimizationType type) {
         switch(type) {
             case SIMPLE_OPT:
                 return new SimpleOptimizer(bound, boundtype);

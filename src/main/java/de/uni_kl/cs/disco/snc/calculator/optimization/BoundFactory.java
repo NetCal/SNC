@@ -20,6 +20,7 @@
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 
 /**

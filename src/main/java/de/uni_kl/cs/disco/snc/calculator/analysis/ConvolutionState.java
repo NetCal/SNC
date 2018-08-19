@@ -26,7 +26,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
  * @author Sebastian Henningsen
  */
 public class ConvolutionState {
-    
     private final String operations;
     private final Arrival arrival;
     

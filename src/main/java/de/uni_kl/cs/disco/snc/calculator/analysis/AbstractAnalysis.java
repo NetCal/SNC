@@ -47,36 +47,23 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  * @author Sebastian Henningsen
  */
 public abstract class AbstractAnalysis implements Analyzer {
-
     protected Map<Integer,Vertex> vertices;
-
     protected Map<Integer,Flow> flows;
-	
     protected int flow_of_interest;
-
     protected int vertex_of_interest;
-        
     protected Network nw;
-	
-    public enum Boundtype{
-    	BACKLOG,
-    	DELAY,
-    	OUTPUT
-	};
-
-	protected Boundtype boundtype;
-	
+	protected BoundType BoundType;
         
 	// TODO
  
     public AbstractAnalysis(Network nw, Map<Integer, Vertex> vertices, Map<Integer, Flow> flows, 
-							int flow_of_interest, int vertex_of_interest, Boundtype boundtype){
+							int flow_of_interest, int vertex_of_interest, BoundType BoundType){
+    	this.nw = nw;
 		this.vertices = vertices;
 		this.flows = flows;
 		this.flow_of_interest = flow_of_interest; 
 		this.vertex_of_interest = vertex_of_interest;
-		this.boundtype = boundtype;
-		this.nw = nw;
+		this.BoundType = BoundType;
 	}
 	
     @Override
@@ -98,7 +85,7 @@ public abstract class AbstractAnalysis implements Analyzer {
 		return flow_of_interest;
 	}
 
-    public Boundtype getBoundtype() {
-		return boundtype;
+    public BoundType getBoundType() {
+		return BoundType;
 	}
 }

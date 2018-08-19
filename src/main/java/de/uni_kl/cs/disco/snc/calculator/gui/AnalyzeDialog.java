@@ -30,6 +30,7 @@ import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
@@ -68,7 +69,7 @@ public class AnalyzeDialog {
         flowSelector = new JComboBox(MainWindow.convertDisplayables(SNC.getInstance().getCurrentNetwork().getFlows()));
 
         analysisSelector = new JComboBox(AnalysisType.values());
-        boundSelector = new JComboBox(AbstractAnalysis.Boundtype.values());
+        boundSelector = new JComboBox(BoundType.values());
 
         layout = new GridLayout(0, 2);
         panel.setLayout(layout);
@@ -96,7 +97,7 @@ public class AnalyzeDialog {
             Vertex vertex = nw.getVertex(vertexID);
             try {
             	SNC.getInstance().analyzeNetwork(flow, vertex, (AnalysisType) analysisSelector.getSelectedItem(),
-                    (AbstractAnalysis.Boundtype) boundSelector.getSelectedItem(), nw);
+                    (BoundType) boundSelector.getSelectedItem(), nw);
             } catch(AnalysisException ex) {
                 System.out.println(ex.getMessage());
             }

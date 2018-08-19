@@ -36,6 +36,7 @@ import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisFactory;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.Analyzer;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.DeadlockException;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddVertexCommand;
@@ -48,7 +49,6 @@ import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.NetworkListener;
 import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
 import de.uni_kl.cs.disco.snc.calculator.optimization.BoundFactory;
-import de.uni_kl.cs.disco.snc.calculator.optimization.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.optimization.Optimizable;
 import de.uni_kl.cs.disco.snc.calculator.optimization.OptimizationFactory;
 import de.uni_kl.cs.disco.snc.calculator.optimization.OptimizationType;
@@ -224,7 +224,7 @@ public class SNC {
      * 
      * @return the result of the analysis in arrival-representation.
      */
-    public Arrival analyzeNetwork(Flow flow, Vertex vertex, AnalysisType anaType, AbstractAnalysis.Boundtype boundtype, Network nw) {
+    public Arrival analyzeNetwork(Flow flow, Vertex vertex, AnalysisType anaType, BoundType boundtype, Network nw) {
         //Preparations
         Arrival bound = null;
         File file = null;
@@ -272,7 +272,7 @@ public class SNC {
 
         double result = Double.NaN;
         double debugVal = Double.NaN;
-        AbstractAnalysis.Boundtype analysisBound = convertBoundTypes(boundType);
+        BoundType analysisBound = convertBoundTypes(boundType);
         Arrival symbolicBound = analyzeNetwork(flow, vertex, analysisType, analysisBound, nw);
 
         //Backlog values are represented by negative values in the arrival representation
@@ -310,12 +310,12 @@ public class SNC {
      * 
      * @return An appropriate AbstractAnalysis.BoundType
      */
-    AbstractAnalysis.Boundtype convertBoundTypes(BoundType boundType) {
-        AbstractAnalysis.Boundtype targetBoundType = null;
+    private BoundType convertBoundTypes(BoundType boundType) {
+    	BoundType targetBoundType = null;
         if (boundType == BoundType.BACKLOG || boundType == BoundType.INVERSE_BACKLOG) {
-            targetBoundType = AbstractAnalysis.Boundtype.BACKLOG;
+            targetBoundType = BoundType.BACKLOG;
         } else if (boundType == BoundType.DELAY || boundType == BoundType.INVERSE_DELAY) {
-            targetBoundType = AbstractAnalysis.Boundtype.DELAY;
+            targetBoundType = BoundType.DELAY;
         } else {
             throw new AnalysisException("No such boundtype");
         }

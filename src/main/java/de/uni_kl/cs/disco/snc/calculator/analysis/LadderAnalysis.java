@@ -62,7 +62,6 @@ import de.uni_kl.cs.disco.utils.SetUtils;
  * @see AbstractAnalysis
  */
 public class LadderAnalysis extends AbstractAnalysis {
-
     /**
      * Constructs the Analysis-Object, with all information needed to give the
      * wished performance bound for the flow.
@@ -78,7 +77,7 @@ public class LadderAnalysis extends AbstractAnalysis {
      * performance bounds are given in {
      * @Arrival}-representation.
      */
-    public LadderAnalysis(Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int end_node, Boundtype boundtype) {
+    public LadderAnalysis(Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int end_node, BoundType boundtype) {
         super(nw, vertices, flows, flow_of_interest, end_node, boundtype);
     }
 
@@ -210,7 +209,8 @@ public class LadderAnalysis extends AbstractAnalysis {
         // The resulting arrival is stored in 
         Arrival aggregatedThrough = new Arrival(nw);
         if (aggregateFlows.size() == 0 ){
-        	//do nothing
+        	// TODO Can this be removed?
+        	// do nothing
         }
         else if (aggregateFlows.size() <= 1) {
             aggregatedThrough = aggregateFlows.get(0).getInitialArrival();
@@ -228,7 +228,7 @@ public class LadderAnalysis extends AbstractAnalysis {
             }
         }
         System.out.println("Aggregate Arrival: " + aggregatedThrough);
-        //Third Step: Using the concatenation result.
+        // Third Step: Using the concatenation result.
         Arrival bound = null;
         bound = calculateBound(flows.get(flow_of_interest).getInitialArrival(), leftoverServices, aggregatedThrough);
         return bound;
@@ -247,105 +247,103 @@ public class LadderAnalysis extends AbstractAnalysis {
      * 
      * @throws BadInitializationException
      */
-    //TODO:(Michael) Get Arrival representation for the delay- (backlog-, and output-)bound. 
+    // TODO:(Michael) Get Arrival representation for the delay- (backlog-, and output-)bound. 
     private Arrival calculateBound(Arrival arrival, List<Service> leftover_services, Arrival aggregated_through) {
 
         Arrival result;
 
         //The result is dependent on the wished performance-bound
-        switch (getBoundtype()) {
-            //TODO:(Michael) Update this to end-to-end
+        switch (getBoundType()) {
+            // TODO:(Michael) Update this to end-to-end
             case BACKLOG:
                 System.out.println("Ladder Analysis for output-bound not implemented, yet.");
                 result = new Arrival(nw);
                 break;
 
             case DELAY:
-
-                //TODO: This dependent case needs thorough testing! Not recommended to use before that.
-                //the sigma and rho of the bound:
+                // TODO: This dependent case needs thorough testing! Not recommended to use before that.
+                // the sigma and rho of the bound:
         /*
-            SymbolicFunction sigma;
-			SymbolicFunction rho;
-			
-			//Intermediate sigmas and rhos used to construct above
-			SymbolicFunction sigma_A;
-			
-			SymbolicFunction rho_agg = aggregated_through.getRho();
-			SymbolicFunction sigma_agg = aggregated_through.getSigma();
-			
-			
-			//Preparations to process dependencies
-			List<Set<Integer>> agg_and_lo_arrival = new ArrayList<Set<Integer>>();
-			agg_and_lo_arrival.add(aggregated_through.getArrivaldependencies());		
-			List<Set<Integer>> agg_and_lo_service = new ArrayList<Set<Integer>>();
-			agg_and_lo_service.add(aggregated_through.getServicedependencies());
-			
-			List<Set<Integer>> lo_arrival = new ArrayList<Set<Integer>>();
-			List<Set<Integer>> lo_service = new ArrayList<Set<Integer>>();
-			List<Set<Integer>> reduced_lo_arrival = new ArrayList<Set<Integer>>();
-			List<Set<Integer>> reduced_lo_service = new ArrayList<Set<Integer>>();
-			
-			for(Service leftover_service : leftover_services){
-				agg_and_lo_arrival.add(leftover_service.getArrivaldependencies());
-				agg_and_lo_service.add(leftover_service.getServicedependencies());
+	            SymbolicFunction sigma;
+				SymbolicFunction rho;
 				
-				lo_arrival.add(leftover_service.getArrivaldependencies());
-				lo_service.add(leftover_service.getServicedependencies());
-				reduced_lo_arrival.add(leftover_service.getArrivaldependencies());
-				reduced_lo_service.add(leftover_service.getServicedependencies());
-			}
-			//Processing of dependencies: Hoelder parameters are introduced for each dependency encountered.
-			//Splitting off the flow of interest from the calculations
-			if(!SetUtils.getIntersection(arrival.getArrivaldependencies(),SetUtils.getUnion(agg_and_lo_arrival)).isEmpty() 
-					|| !SetUtils.getIntersection(arrival.getServicedependencies(),SetUtils.getUnion(agg_and_lo_service)).isEmpty())
-					{
-				Hoelder hoelder = nw.createHoelder();
-				rho = new UnitaryMinus(new scaledFunction(arrival.getRho(),hoelder,true));
-				sigma_A = new scaledFunction(arrival.getSigma(),hoelder,true);
+				// Intermediate sigmas and rhos used to construct above
+				SymbolicFunction sigma_A;
 				
-				rho_agg = new scaledFunction(aggregated_through.getRho(),hoelder,false);
-				sigma_agg = new scaledFunction(aggregated_through.getSigma(),hoelder,false);
-				for(Service leftover_service : leftover_services){
-					leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,false));
-					leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,false));
-				}
-			}
-			else{
-				rho = new UnitaryMinus(arrival.getRho());
-				sigma_A = arrival.getSigma();
-			}
-			//Splitting off the aggregated through-flow from the calculations
-			if(!SetUtils.getIntersection(aggregated_through.getArrivaldependencies(), SetUtils.getUnion(lo_arrival)).isEmpty()
-					|| !SetUtils.getIntersection(aggregated_through.getArrivaldependencies(), SetUtils.getUnion(lo_service)).isEmpty()){
-				Hoelder hoelder = nw.createHoelder();
-				rho_agg = new scaledFunction(rho_agg,hoelder,true);
-				sigma_agg = new scaledFunction(sigma_agg,hoelder,true);
+				SymbolicFunction rho_agg = aggregated_through.getRho();
+				SymbolicFunction sigma_agg = aggregated_through.getSigma();
+				
+				
+				// Preparations to process dependencies
+				List<Set<Integer>> agg_and_lo_arrival = new ArrayList<Set<Integer>>();
+				agg_and_lo_arrival.add(aggregated_through.getArrivaldependencies());		
+				List<Set<Integer>> agg_and_lo_service = new ArrayList<Set<Integer>>();
+				agg_and_lo_service.add(aggregated_through.getServicedependencies());
+				
+				List<Set<Integer>> lo_arrival = new ArrayList<Set<Integer>>();
+				List<Set<Integer>> lo_service = new ArrayList<Set<Integer>>();
+				List<Set<Integer>> reduced_lo_arrival = new ArrayList<Set<Integer>>();
+				List<Set<Integer>> reduced_lo_service = new ArrayList<Set<Integer>>();
 				
 				for(Service leftover_service : leftover_services){
-					leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,false));
-					leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,false));
+					agg_and_lo_arrival.add(leftover_service.getArrivaldependencies());
+					agg_and_lo_service.add(leftover_service.getServicedependencies());
+					
+					lo_arrival.add(leftover_service.getArrivaldependencies());
+					lo_service.add(leftover_service.getServicedependencies());
+					reduced_lo_arrival.add(leftover_service.getArrivaldependencies());
+					reduced_lo_service.add(leftover_service.getServicedependencies());
 				}
-			}
-			//Splitting off each leftover service from the calculations
-			List<Service> sublist_leftover_services = leftover_services.subList(1, leftover_services.size()); 
-			for(Service leftover_service : leftover_services){
-				reduced_lo_arrival.remove(leftover_service.getArrivaldependencies());
-				reduced_lo_service.remove(leftover_service.getServicedependencies());
-				if(!SetUtils.getIntersection(leftover_service.getArrivaldependencies(), SetUtils.getUnion(reduced_lo_arrival)).isEmpty()
-					||	!SetUtils.getIntersection(leftover_service.getServicedependencies(), SetUtils.getUnion(reduced_lo_service)).isEmpty()){
+				// Processing of dependencies: Hoelder parameters are introduced for each dependency encountered.
+				// Splitting off the flow of interest from the calculations
+				if(!SetUtils.getIntersection(arrival.getArrivaldependencies(),SetUtils.getUnion(agg_and_lo_arrival)).isEmpty() 
+						|| !SetUtils.getIntersection(arrival.getServicedependencies(),SetUtils.getUnion(agg_and_lo_service)).isEmpty())
+						{
 					Hoelder hoelder = nw.createHoelder();
-					leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,true));
-					leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,true));
-					for(Service other_service : sublist_leftover_services){
-						other_service.setRho(new scaledFunction(other_service.getRho(),hoelder,false));
-						other_service.setSigma(new scaledFunction(other_service.getSigma(),hoelder,false));
+					rho = new UnitaryMinus(new scaledFunction(arrival.getRho(),hoelder,true));
+					sigma_A = new scaledFunction(arrival.getSigma(),hoelder,true);
+					
+					rho_agg = new scaledFunction(aggregated_through.getRho(),hoelder,false);
+					sigma_agg = new scaledFunction(aggregated_through.getSigma(),hoelder,false);
+					for(Service leftover_service : leftover_services){
+						leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,false));
+						leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,false));
 					}
-					sublist_leftover_services = sublist_leftover_services.subList(1,sublist_leftover_services.size());
+				} else{
+					rho = new UnitaryMinus(arrival.getRho());
+					sigma_A = arrival.getSigma();
 				}
-			}
+				// Splitting off the aggregated through-flow from the calculations
+				if(!SetUtils.getIntersection(aggregated_through.getArrivaldependencies(), SetUtils.getUnion(lo_arrival)).isEmpty()
+						|| !SetUtils.getIntersection(aggregated_through.getArrivaldependencies(), SetUtils.getUnion(lo_service)).isEmpty()){
+					Hoelder hoelder = nw.createHoelder();
+					rho_agg = new scaledFunction(rho_agg,hoelder,true);
+					sigma_agg = new scaledFunction(sigma_agg,hoelder,true);
+					
+					for(Service leftover_service : leftover_services){
+						leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,false));
+						leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,false));
+					}
+				}
+				// Splitting off each leftover service from the calculations
+				List<Service> sublist_leftover_services = leftover_services.subList(1, leftover_services.size()); 
+				for(Service leftover_service : leftover_services){
+					reduced_lo_arrival.remove(leftover_service.getArrivaldependencies());
+					reduced_lo_service.remove(leftover_service.getServicedependencies());
+					if(!SetUtils.getIntersection(leftover_service.getArrivaldependencies(), SetUtils.getUnion(reduced_lo_arrival)).isEmpty()
+						||	!SetUtils.getIntersection(leftover_service.getServicedependencies(), SetUtils.getUnion(reduced_lo_service)).isEmpty()){
+						Hoelder hoelder = nw.createHoelder();
+						leftover_service.setRho(new scaledFunction(leftover_service.getRho(),hoelder,true));
+						leftover_service.setSigma(new scaledFunction(leftover_service.getSigma(),hoelder,true));
+						for(Service other_service : sublist_leftover_services){
+							other_service.setRho(new scaledFunction(other_service.getRho(),hoelder,false));
+							other_service.setSigma(new scaledFunction(other_service.getSigma(),hoelder,false));
+						}
+						sublist_leftover_services = sublist_leftover_services.subList(1,sublist_leftover_services.size());
+					}
+				}
         */
-                //INDEPENDENT CASE
+                // Independent Case
                 SymbolicFunction rho = new UnitaryMinus(arrival.getRho());
                 SymbolicFunction sigma = arrival.getSigma();
                 SymbolicFunction rho_through_total = arrival.getRho();
@@ -360,14 +358,14 @@ public class LadderAnalysis extends AbstractAnalysis {
                 }
 
                 System.out.println("Ladder Analysis (Independent Case):");
-                //Debugging
+                // Debugging
                 System.out.println("Delay-Form Sigma: "+sigma.toString());
                 System.out.println("Delay-Form Rho: "+rho.toString());
 
                 result = new Arrival(sigma, rho, nw);
 
                 break;
-            //TODO: (Michael) Update this to end-to-end (if possible)
+            // TODO: (Michael) Update this to end-to-end (if possible)
             case OUTPUT:
                 System.out.println("Ladder Analysis for output-bound not implemented, yet.");
                 result = new Arrival(nw);

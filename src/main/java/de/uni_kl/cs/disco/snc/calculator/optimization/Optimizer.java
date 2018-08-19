@@ -19,7 +19,7 @@
 
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServerOverloadException;
@@ -48,12 +48,12 @@ public interface Optimizer {
             throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 
     @Deprecated
-    public double Bound(Arrival input, AbstractAnalysis.Boundtype boundtype, 
+    public double Bound(Arrival input, BoundType boundtype, 
             double bound, double thetagranularity, double hoeldergranularity) 
             throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 
     @Deprecated
-    public abstract double ReverseBound(Arrival input, AbstractAnalysis.Boundtype boundtype, 
+    public abstract double ReverseBound(Arrival input, BoundType boundtype, 
             double violation_probability, double thetagranularity, double hoeldergranularity) 
             throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 }

@@ -28,6 +28,5 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  * @author Sebastian Henningsen
  */
 public interface Analyzer {
-
     public abstract Arrival analyze() throws ArrivalNotAvailableException, DeadlockException, BadInitializationException;
 }

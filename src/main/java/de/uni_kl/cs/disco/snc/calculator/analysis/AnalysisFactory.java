@@ -30,8 +30,7 @@ import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
  * @author Sebastian Henningsen
  */
 public class AnalysisFactory {
-    
-    public static Analyzer getAnalyzer(AnalysisType type, Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int vertex_of_interest, AbstractAnalysis.Boundtype boundtype) {
+    public static Analyzer getAnalyzer(AnalysisType type, Network nw, Map<Integer,Vertex> vertices, Map<Integer,Flow> flows, int flow_of_interest, int vertex_of_interest, BoundType boundtype) {
         switch(type) {
             case SIMPLE_ANA:
                 return new SimpleAnalysis(nw, vertices, flows, flow_of_interest, vertex_of_interest, boundtype);

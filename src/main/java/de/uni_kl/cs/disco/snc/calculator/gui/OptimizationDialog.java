@@ -33,10 +33,10 @@ import javax.swing.SpinnerNumberModel;
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
-import de.uni_kl.cs.disco.snc.calculator.optimization.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.optimization.OptimizationType;
 
 /**

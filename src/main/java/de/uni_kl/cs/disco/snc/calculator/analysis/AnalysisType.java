@@ -24,7 +24,6 @@ package de.uni_kl.cs.disco.snc.calculator.analysis;
  * @author Sebastian Henningsen
  */
 public enum AnalysisType {
-
     SIMPLE_ANA {
         @Override
 		public String toString() {

@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis.Boundtype;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Hoelder;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
@@ -52,7 +51,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
      * @param input
      * @param boundtype
      */
-    public SimpleOptimizer(Optimizable input, Boundtype boundtype) {
+    public SimpleOptimizer(Optimizable input, BoundType boundtype) {
 		super(input, boundtype);
 	}
 	
@@ -142,7 +141,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
     }
         
 	@Override
-	public double ReverseBound(Arrival input, Boundtype boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
+	public double ReverseBound(Arrival input, BoundType boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 		double result;
 		
 		// Initializes the IncrementList of Hoelder-Parameters...
@@ -151,7 +150,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 		allparameters.putAll(input.getRho().getParameters());
 		
 		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
-		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
+		if(boundtype == BoundType.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(0);
 			allparameters.remove(allparameters.size());
 		}
@@ -343,7 +342,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 	}
 	
 	@Override
-	public double Bound(Arrival input, Boundtype boundtype, double bound, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
+	public double Bound(Arrival input, BoundType boundtype, double bound, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 		double result;
 		
 		// Initializes the IncrementList of Hoelder-Parameters...
@@ -353,7 +352,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 		allparameters.putAll(input.getRho().getParameters());
 		
 		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
-		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
+		if(boundtype == BoundType.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(bound);
 			allparameters.remove(allparameters.size());
 		}

@@ -20,6 +20,7 @@
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
 import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
+import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServerOverloadException;
@@ -48,7 +49,7 @@ public abstract class AbstractOptimizer implements Optimizer {
     /**
      * A leftover, this information is now encapsulated into the implementations of @link Optimizable
      */
-    protected AbstractAnalysis.Boundtype boundtype;
+    protected BoundType boundtype;
 
     /**
      * The maximum value of theta
@@ -62,7 +63,7 @@ public abstract class AbstractOptimizer implements Optimizer {
      * @param boundtype Leftover, will be removed in future versions
      * @param nw The corresponding network the optimizer is associated with
      */
-    public AbstractOptimizer(Optimizable input, AbstractAnalysis.Boundtype boundtype){
+    public AbstractOptimizer(Optimizable input, BoundType boundtype){
 		this.bound = input;
 		this.boundtype = boundtype;
 	}
@@ -102,7 +103,7 @@ public abstract class AbstractOptimizer implements Optimizer {
 	 */
     @Deprecated
     @Override
-	public abstract double Bound(Arrival input, AbstractAnalysis.Boundtype boundtype, double bound, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
+	public abstract double Bound(Arrival input, BoundType boundtype, double bound, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 	
 	/**
 	 * Computes the reverse bound for delay of backlog. The 
@@ -125,6 +126,6 @@ public abstract class AbstractOptimizer implements Optimizer {
 	 */
     @Deprecated
     @Override
-	public abstract double ReverseBound(Arrival input, AbstractAnalysis.Boundtype boundtype, 
+	public abstract double ReverseBound(Arrival input, BoundType boundtype, 
 										double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 }

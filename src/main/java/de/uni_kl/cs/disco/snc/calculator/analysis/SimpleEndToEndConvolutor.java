@@ -34,8 +34,7 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  * @author Sebastian Henningsen
  */
 public class SimpleEndToEndConvolutor {
-    
-    Flow flowOfInterest;
+	private Flow flowOfInterest;
     
     public SimpleEndToEndConvolutor(Flow flowOfInterest) {
         this.flowOfInterest = flowOfInterest;
@@ -82,7 +81,7 @@ public class SimpleEndToEndConvolutor {
 		    // Only one node in network
 	        results = new ArrayList<>();
 	        
-	        Analyzer analyzer = AnalysisFactory.getAnalyzer(AnalysisType.SIMPLE_ANA, nw, nw.getVertices(), nw.getFlows(), flowOfInterest.getID(), vertex1ID, AbstractAnalysis.Boundtype.DELAY);
+	        Analyzer analyzer = AnalysisFactory.getAnalyzer(AnalysisType.SIMPLE_ANA, nw, nw.getVertices(), nw.getFlows(), flowOfInterest.getID(), vertex1ID, BoundType.DELAY);
 	        try {
 	            bound = analyzer.analyze();
 	        } catch (    ArrivalNotAvailableException | DeadlockException | BadInitializationException ex) {

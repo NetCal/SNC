@@ -29,7 +29,6 @@ package de.uni_kl.cs.disco.snc.calculator.analysis;
  * @see Analysis
  */
 public class DeadlockException extends Exception {
-
 	private static final long serialVersionUID = 1955595315940127710L;
 
     public DeadlockException(String e){
