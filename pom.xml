@@ -21,12 +21,6 @@
 
     <developers>
         <developer>
-            <name>Michael Beck</name>
-            <email>MichaelAlexander.Beck@umanitoba.ca</email>
-            <organization>University of Manitoba</organization>
-            <organizationUrl></organizationUrl>
-        </developer>
-        <developer>
             <name>Sebastian Henningsen</name>
             <email>sebastian.henningsen@hu-berlin.de</email>
             <organization>Humboldt University of Berlin</organization>
