@@ -63,14 +63,14 @@ import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
  */
 public class Network implements Serializable {
 	private static final long serialVersionUID = 695224731594099768L;
+    
+    private Map<Integer, Vertex> vertices;
+    private Map<Integer, Flow> flows;
+    private Map<Integer, Hoelder> hoelders;
 	
 	private int FLOW_ID;
     private int VERTEX_ID;
     private int HOELDER_ID;
-    
-    private Map<Integer, Flow> flows;
-    private Map<Integer, Vertex> vertices;
-    private Map<Integer, Hoelder> hoelders;
     
     private List<NetworkListener> listeners;
 
@@ -79,12 +79,14 @@ public class Network implements Serializable {
     }
 
     public Network(Map<Integer, Vertex> vertices, Map<Integer, Flow> flows, Map<Integer, Hoelder> hoelders) {
+    	this.vertices = (vertices != null) ? vertices : new HashMap<Integer, Vertex>();
         this.flows = (flows != null) ? flows : new HashMap<Integer, Flow>();
-        this.vertices = (vertices != null) ? vertices : new HashMap<Integer, Vertex>();
         this.hoelders = (hoelders != null) ? hoelders : new HashMap<Integer, Hoelder>();
+        
         FLOW_ID = this.flows.size() + 1;
         VERTEX_ID = this.vertices.size() + 1;
         HOELDER_ID = this.hoelders.size() + 1;
+        
         this.listeners = new ArrayList<NetworkListener>();
     }
 
@@ -316,7 +318,7 @@ public class Network implements Serializable {
             arrivals.add(new Arrival(this));
         }
 
-        //Adds the flow into the flow list
+        // Adds the flow into the flow list
         Flow flow = new Flow(FLOW_ID, route, arrivals, priorities, alias, this);
         // Check whether every vertex exists
         for (int i = 0; i < route.size(); i++) {
@@ -324,18 +326,20 @@ public class Network implements Serializable {
                 throw new NetworkActionException("Error while adding flow " + alias + ". No node with ID " + i);
             }
         }
-        //Initializes the first arrival at the first vertex
+        // Initializes the first arrival at the first vertex
         Vertex first_vertex = vertices.get(route.get(0));
 
         flows.put(FLOW_ID, flow);
-        //Writes the flow in its corresponding vertices
+        
+        // Writes the flow in its corresponding vertices
         for (int i = 0; i < route.size(); i++) {
             Vertex vertex;
             vertex = vertices.get(route.get(i));
             vertex.addUnknownArrival(priorities.get(i), FLOW_ID);
         }
         first_vertex.learnArrival(FLOW_ID, initial_arrival);
-        //Increments the flow count
+
+        // Increments the flow count
         incrementFLOW_ID();
 
         // Notify the listeners
@@ -354,11 +358,10 @@ public class Network implements Serializable {
      * @param priority the priority the flow has at the appended vertex.
      */
     public void appendNode(int flow_id, int vertex_id, int priority) {
-
-        //Adds the vertex to the path of the flow
+        // Adds the vertex to the path of the flow
         flows.get(flow_id).addNodetoPath(vertex_id, priority);
 
-        //Adds a non-established arrival to the appended vertex
+        // Adds a non-established arrival to the appended vertex
         vertices.get(vertex_id).addUnknownArrival(priority, flow_id);
     }
 
@@ -371,11 +374,10 @@ public class Network implements Serializable {
      * @throws ArrivalNotAvailableException
      */
     public void setInitialArrival(int flow_id, Arrival arrival) throws ArrivalNotAvailableException {
-
-        //initializes the arrival at the flow
+        // Initializes the arrival at the flow
         flows.get(flow_id).setInitialArrival(arrival);
 
-        //the arrival is established at the vertex
+        // The arrival is established at the vertex
         Vertex vertex = vertices.get(flows.get(flow_id).getFirstVertexID());
         vertex.learnArrival(flow_id, arrival);
     }
@@ -437,21 +439,38 @@ public class Network implements Serializable {
      * @return
      */
     public String getStringRepresentation() {
-        String result_string = "List of vertices:\n";
-        for (Map.Entry<Integer, Vertex> entry : vertices.entrySet()) {
-            result_string = result_string + "Vertex-ID: " + entry.getValue().getID()
-                    + "\t Vertex-Alias: " + entry.getValue().getAlias() + "\n";
+		StringBuffer network_str = new StringBuffer();
+		
+		network_str.append("List of vertices:");
+		network_str.append("\n");
+        for (Map.Entry<Integer,Vertex> entry : vertices.entrySet()) {
+    		network_str.append("Vertex-ID: ");
+    		network_str.append(Integer.toString(entry.getValue().getID()));
+    		network_str.append("\t");
+    		network_str.append(" Vertex-Alias: ");
+    		network_str.append(entry.getValue().getAlias());
+    		network_str.append("\n");
         }
-        result_string = result_string + "List of flows:\n";
-        for (Map.Entry<Integer, Flow> entry : flows.entrySet()) {
-            result_string = result_string + "Flow-ID: " + entry.getValue().getID()
-                    + "\t Flow-Alias: " + entry.getValue().getAlias() + "\t route:\n" + entry.getValue().getVerticeIDs().toString() + "\n";
+        
+		network_str.append("List of flows:");
+		network_str.append("\n");
+        for (Map.Entry<Integer,Flow> entry : flows.entrySet()) {
+    		network_str.append("Flow-ID: ");
+    		network_str.append(Integer.toString(entry.getValue().getID()));
+    		network_str.append("\t");
+    		network_str.append(" Flow-Alias: ");
+    		network_str.append(entry.getValue().getAlias());
+    		network_str.append("\t");
+    		network_str.append(" route:");
+    		network_str.append("\n");
+    		network_str.append(entry.getValue().getVerticeIDs().toString());
         }
 
-        return result_string + "Number of Hoelder parameters: " + (HOELDER_ID - 1);
+		network_str.append("Number of Hoelder parameters: ");
+		network_str.append(Integer.toString(HOELDER_ID - 1));
+
+		return network_str.toString();
     }
-
-    //Getter and Setter
 
     public Vertex getVertex(int id) {
         return vertices.get(id);
@@ -488,7 +507,6 @@ public class Network implements Serializable {
     }
 
     public Network deepCopy() {
-
         Map<Integer, Vertex> newVertices = new HashMap<Integer, Vertex>(this.vertices.size());
         Map<Integer, Flow> newFlows = new HashMap<Integer, Flow>(this.flows.size());
         Map<Integer, Hoelder> newHoelders = new HashMap<Integer, Hoelder>(this.hoelders.size());
@@ -523,7 +541,7 @@ public class Network implements Serializable {
      * @return
      */
     public static Network load(File profile_path, boolean redirectListeners) {
-        //will read profile.txt line by line
+        // will read profile.txt line by line
         Network nw = new Network();
         // Kind of a hack
         if (redirectListeners) {
@@ -536,9 +554,9 @@ public class Network implements Serializable {
         try (BufferedReader br = new BufferedReader(new FileReader(profile_path))) {
             String sCurrentLine;
 
-            //reads all lines
+            // reads all lines
             while ((sCurrentLine = br.readLine()) != null) {
-                //if a line starts with "I" an interface (i.e. service element) is added to the network in form of a Vertex.
+                // If a line starts with "I" an interface (i.e. service element) is added to the network in form of a Vertex.
                 if (sCurrentLine.startsWith("I")) {
                     try {
                         nw.handleVertexLine(sCurrentLine);
@@ -549,7 +567,7 @@ public class Network implements Serializable {
                     }
                 }
 
-                //if a line starts with "F" a flow is added to the network in form of a Flow-object.
+                // If a line starts with "F" a flow is added to the network in form of a Flow-object.
                 if (sCurrentLine.startsWith("F")) {
                     try {
                         nw.handleFlowLine(sCurrentLine);
@@ -596,6 +614,7 @@ public class Network implements Serializable {
 
     private void handleFlowLine(String line) throws NumberFormatException, BadInitializationException, ArrivalNotAvailableException {
         final int pathOffset = 2; // There are 2 entries before the route
+        
         // Removes the first character, we do not need that anoymore
         line = line.substring(1).trim();
         String[] lineParts = line.split(",");
@@ -648,7 +667,6 @@ public class Network implements Serializable {
                 maxTheta = Double.parseDouble(lineParts[pathOffset + pathLength + 3].trim());
                 arrival = ArrivalFactory.buildStationaryTB(rate, bucket, maxTheta);
             }
-
         } else {
             throw new FileOperationException("No arrival with type " + arrivalType + " known.", line);
         }
@@ -671,7 +689,6 @@ public class Network implements Serializable {
         }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-
             // Write out the nodes
             for (Vertex v : this.getVertices().values()) {
                 bw.write("I " + v.getAlias() + ", " + "FIFO" + ", " + "CR" + ", " + v.getService().getRho().toString().substring(1));

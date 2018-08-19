@@ -45,17 +45,17 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
  */
 public class Flow implements Serializable, Displayable {
     private static final long serialVersionUID = 7989846738211040015L;
+
+    private int ID;
     
     private List<Integer> vertices;
     private List<Arrival> arrivals;
     private List<Integer> priorities;
 
-    private int ID;
     private String alias;
+    private Network nw;
 
     private int established_arrivals;
-
-    private Network nw;
 
     /**
      * Constructs a flow, with the complete route through the network and
@@ -79,6 +79,7 @@ public class Flow implements Serializable, Displayable {
      */
     public Flow(int flow_ID, List<Integer> vertices, List<Arrival> arrivals,
             List<Integer> priorities, String alias, Network nw) {
+    	this.ID = flow_ID;
         this.vertices = vertices;
         this.arrivals = arrivals;
         this.priorities = priorities;
@@ -88,12 +89,14 @@ public class Flow implements Serializable, Displayable {
         if(vertices.size() != priorities.size() || arrivals.size() > vertices.size()) {
             throw new NetworkActionException("Flow cannot be constructed. route, priorities and arrivals do not match.");
         }
+        
         // TODO: Make this safer
         established_arrivals = 1;
-        this.ID = flow_ID;
         this.alias = alias == null ? "" : alias;
+        
         // TODO: Why?
         arrivals.get(0).addArrivalDependency(flow_ID);
+        
         this.nw = nw;
     }
 
@@ -106,8 +109,8 @@ public class Flow implements Serializable, Displayable {
      */
     public void addNodetoPath(int vertex_ID, int priority) {
         vertices.add(vertex_ID);
-        arrivals.add(new Arrival(nw));
         priorities.add(priority);
+        arrivals.add(new Arrival(nw));
     }
 
     /**
