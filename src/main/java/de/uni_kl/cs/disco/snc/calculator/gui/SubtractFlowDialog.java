@@ -40,7 +40,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServiceType;
  * @author Sebastian Henningsen
  */
 public class SubtractFlowDialog {
-
     private final JPanel panel;
     private final JLabel alias;
     private final JLabel service;

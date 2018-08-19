@@ -40,7 +40,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServiceType;
  * @author Michael Beck
  */
 public class AddVertexDialog {
-
     private final JPanel panel;
     private final JLabel alias;
     private final JLabel service;

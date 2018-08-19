@@ -41,7 +41,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ConstantFunctio
  * @author Sebastian Henningsen
  */
 public class AddFlowDialog {
-
     private JPanel panel;
     private JLabel alias;
     private JLabel service;

@@ -22,11 +22,11 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 
 /**
- * Convolute two adjacent vertices ({@link Vertex}) in a given target network.
+ * Convolve two adjacent vertices ({@link Vertex}) in a given target network.
  * 
  * @author Sebastian Henningsen
  */
-public class ConvoluteVerticesCommand implements Command {
+public class ConvolveVerticesCommand implements Command {
 	private final int vertex1ID;
 	private final int vertex2ID;
 	private final int flowID;
@@ -34,7 +34,7 @@ public class ConvoluteVerticesCommand implements Command {
 	private final SNC snc;
     
     /**
-     * Creates a new command to convolute two vertices, the action is relayed to the
+     * Creates a new command to convolve two vertices, the action is relayed to the
      * corresponding {@link Network}
      * 
      * @param vertex1ID The ID of the first vertex
@@ -43,7 +43,7 @@ public class ConvoluteVerticesCommand implements Command {
      * @param networkID The network ID the vertices belong to
      * @param snc The overall controller
      */
-    public ConvoluteVerticesCommand(int vertex1ID, int vertex2ID, int flowID, int networkID, SNC snc) {
+    public ConvolveVerticesCommand(int vertex1ID, int vertex2ID, int flowID, int networkID, SNC snc) {
         this.vertex1ID = vertex1ID;
         this.vertex2ID = vertex2ID;
         this.flowID = flowID;
@@ -53,7 +53,7 @@ public class ConvoluteVerticesCommand implements Command {
     
     @Override
     public void execute() {
-        snc.getCurrentNetwork().convolute(vertex1ID, vertex2ID, flowID);
+        snc.getCurrentNetwork().convolve(vertex1ID, vertex2ID, flowID);
     }
 
     @Override

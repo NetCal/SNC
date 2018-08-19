@@ -21,7 +21,7 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.analysis.ConvolutionState;
-import de.uni_kl.cs.disco.snc.calculator.analysis.SimpleEndToEndConvolutor;
+import de.uni_kl.cs.disco.snc.calculator.analysis.SimpleEndToEndConvolution;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 
@@ -49,8 +49,8 @@ public class EndToEndConvolutionCommand implements Command {
     
     @Override
     public void execute() {
-        SimpleEndToEndConvolutor convolutor = new SimpleEndToEndConvolutor(flowOfInterest);
-        List<ConvolutionState> results = convolutor.computeAllConvolutions("", vertex1ID, vertex2ID, nw);
+        SimpleEndToEndConvolution convolution = new SimpleEndToEndConvolution(flowOfInterest);
+        List<ConvolutionState> results = convolution.computeAllConvolutions("", vertex1ID, vertex2ID, nw);
         for (ConvolutionState res : results) {
             System.out.println(res.getOperations());
         }

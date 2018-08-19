@@ -30,7 +30,6 @@ import javax.swing.JPanel;
  * @author Sebastian Henningsen
  */
 public class ControlPanel {
-
     private final JPanel controllerPanel;
     private final JButton addVertexButton;
     private final JButton removeVertexButton;
@@ -39,7 +38,7 @@ public class ControlPanel {
     private final JButton analyzeButton;
     private final JButton optimizeButton;
     private final JButton subtractButton;
-    private final JButton convoluteButton;
+    private final JButton convolveButton;
 
     /**
      * Constructs a new panel.
@@ -75,9 +74,9 @@ public class ControlPanel {
         subtractButton.setAction(new ControlPanelActions.SubtractAction("Subtract Flow"));
         controllerPanel.add(subtractButton);
         
-        convoluteButton = new JButton();
-        convoluteButton.setAction(new ControlPanelActions.ConvoluteAction("Convolute Vertices"));
-        controllerPanel.add(convoluteButton);
+        convolveButton = new JButton();
+        convolveButton.setAction(new ControlPanelActions.ConvolveAction("Convolve Vertices"));
+        controllerPanel.add(convolveButton);
     }
 
     /**

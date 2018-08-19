@@ -28,16 +28,15 @@ import javax.swing.JPanel;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.commands.Command;
-import de.uni_kl.cs.disco.snc.calculator.commands.ConvoluteVerticesCommand;
+import de.uni_kl.cs.disco.snc.calculator.commands.ConvolveVerticesCommand;
 import de.uni_kl.cs.disco.snc.calculator.network.Network;
 
 /**
- * A dialog to get input from the user in order to convolute two vertices.
+ * A dialog to get input from the user in order to convolve two vertices.
  *
  * @author Sebastian Henningsen
  */
-public class ConvoluteVerticesDialog {
-
+public class ConvolveVerticesDialog {
     private final JPanel panel;
     private final JLabel vertex1;
     private final JLabel vertex2;
@@ -51,7 +50,7 @@ public class ConvoluteVerticesDialog {
     /**
      * Constructs the dialog and initializes all necessary fields.
      */
-    public ConvoluteVerticesDialog() {
+    public ConvolveVerticesDialog() {
         panel = new JPanel();
         Network nw = SNC.getInstance().getCurrentNetwork();
 
@@ -78,7 +77,7 @@ public class ConvoluteVerticesDialog {
      * Displays the dialog
      */
     public void display() {
-        int result = JOptionPane.showConfirmDialog(null, panel, "Convolute vertices",
+        int result = JOptionPane.showConfirmDialog(null, panel, "Convolve vertices",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             SNC snc = SNC.getInstance();
@@ -86,7 +85,7 @@ public class ConvoluteVerticesDialog {
             int vertex2ID = ((Displayable) vertex2Chooser.getSelectedItem()).getID();
             int flowID = ((Displayable) flowChooser.getSelectedItem()).getID();
             // v1, v2, flow, nw, snc
-            Command cmd = new ConvoluteVerticesCommand(vertex1ID, vertex2ID, flowID, -1, SNC.getInstance());
+            Command cmd = new ConvolveVerticesCommand(vertex1ID, vertex2ID, flowID, -1, SNC.getInstance());
             snc.invokeCommand(cmd);
             // Just for debugging
             //System.out.println(aliasField.getText());

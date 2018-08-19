@@ -52,15 +52,14 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  *
  * @author Michael Beck
  * @author Sebastian Henningsen
- *
  */
 public class FlowEditor extends JDialog {
-
     private static final long serialVersionUID = 4146247537102257784L;
 
     static final int CANCEL_OPTION = 0;
     static final int APPROVE_OPTION = 1;
     static final int ERROR_OPTION = 2;
+    
     private int output = 0;
     private Arrival flow_arrival;
    

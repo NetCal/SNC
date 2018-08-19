@@ -36,7 +36,6 @@ import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
  * @author Michael Beck
  */
 public class VertexTablePanel {
-
     private final JScrollPane scrollPane;
     private final JTable table;
     private final DefaultTableModel tableModel;

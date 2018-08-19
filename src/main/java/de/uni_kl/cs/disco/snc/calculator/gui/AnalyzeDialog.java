@@ -42,7 +42,6 @@ import de.uni_kl.cs.disco.snc.calculator.network.Vertex;
  * @author Michael Beck
  */
 public class AnalyzeDialog {
-
     private final JPanel panel;
     private final JLabel vertexOfInterest;
     private final JLabel flowOfInterest;

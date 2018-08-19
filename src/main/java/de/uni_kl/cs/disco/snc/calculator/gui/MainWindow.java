@@ -35,7 +35,6 @@ import javax.swing.JSplitPane;
  * @author Sebastian Henningsen
  */
 public class MainWindow {
-
     private JFrame mainFrame;
     private MenuBar menuBar;
     private VertexTablePanel vertexTablePanel;

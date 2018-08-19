@@ -41,7 +41,7 @@ import de.uni_kl.cs.disco.snc.calculator.analysis.DeadlockException;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddFlowCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.AddVertexCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.Command;
-import de.uni_kl.cs.disco.snc.calculator.commands.ConvoluteVerticesCommand;
+import de.uni_kl.cs.disco.snc.calculator.commands.ConvolveVerticesCommand;
 import de.uni_kl.cs.disco.snc.calculator.gui.MainWindow;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
@@ -334,7 +334,7 @@ public class SNC {
         f1Prio.add(1);
         Arrival arrival = new Arrival(new ConstantFunction(0), new ConstantFunction(0.5), nw);
         Command addF1 = new AddFlowCommand("F1", arrival, f1Route, f1Prio, -1, SNC.getInstance());
-        //Command convV1V2 = new ConvoluteVerticesCommand(1, 2, -1, SNC.getInstance());
+        //Command convV1V2 = new ConvolveVerticesCommand(1, 2, -1, SNC.getInstance());
         invokeCommand(addV1);
         invokeCommand(addV2);
         invokeCommand(addF1);

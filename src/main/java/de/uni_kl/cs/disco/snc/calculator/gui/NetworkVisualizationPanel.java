@@ -55,11 +55,10 @@ import org.apache.commons.collections15.Transformer;
  * @author Sebastian Henningsen
  */
 public class NetworkVisualizationPanel {
-
     private GraphZoomScrollPane visualizationPanel;
     private Graph<GraphItem, GraphItem> graph;
     private Layout<GraphItem, GraphItem> layout;
-    VisualizationViewer<GraphItem, GraphItem> bvs;
+    private VisualizationViewer<GraphItem, GraphItem> bvs;
     private Dimension size;
     private List<GraphItem> vertices;
     private List<GraphItem> flows;

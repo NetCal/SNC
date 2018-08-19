@@ -53,7 +53,6 @@ public class BacklogBound implements Optimizable {
         this.allHoelders = new HashMap<>(0);
         allHoelders.putAll(input.getSigma().getParameters());
         allHoelders.putAll(input.getRho().getParameters());
-
     }
 
     @Override

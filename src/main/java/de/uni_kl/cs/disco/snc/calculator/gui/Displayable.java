@@ -28,7 +28,6 @@ package de.uni_kl.cs.disco.snc.calculator.gui;
  * @author Sebastian Henningsen
  */
 public interface Displayable {
-
     /**
      * Returns the alias of the element.
      * 

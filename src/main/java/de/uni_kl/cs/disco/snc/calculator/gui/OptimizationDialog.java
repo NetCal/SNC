@@ -47,7 +47,6 @@ import de.uni_kl.cs.disco.snc.calculator.optimization.OptimizationType;
  * @author Michael Beck
  */
 public class OptimizationDialog {
-
     private final JPanel panel;
     private final JLabel vertexOfInterest;
     private final JLabel flowOfInterest;

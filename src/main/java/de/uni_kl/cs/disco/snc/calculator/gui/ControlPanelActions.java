@@ -39,10 +39,10 @@ import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
  * @author Michael Beck
  */
 public class ControlPanelActions {
-
     static class AddNodeAction extends AbstractAction {
+		private static final long serialVersionUID = -1455158874979173165L;
 
-        public AddNodeAction(String name) {
+		public AddNodeAction(String name) {
             super(name);
         }
 
@@ -54,8 +54,9 @@ public class ControlPanelActions {
     }
 
     static class RemoveNodeAction extends AbstractAction {
+		private static final long serialVersionUID = 9034466386639762182L;
 
-        public RemoveNodeAction(String name) {
+		public RemoveNodeAction(String name) {
             super(name);
         }
 
@@ -90,8 +91,9 @@ public class ControlPanelActions {
     }
 
     static class RemoveFlowAction extends AbstractAction {
+		private static final long serialVersionUID = 1765962746248789312L;
 
-        public RemoveFlowAction(String name) {
+		public RemoveFlowAction(String name) {
             super(name);
         }
 
@@ -128,8 +130,9 @@ public class ControlPanelActions {
     }
 
     static class AddFlowAction extends AbstractAction {
+		private static final long serialVersionUID = -4318326828473374522L;
 
-        public AddFlowAction(String name) {
+		public AddFlowAction(String name) {
             super(name);
         }
 
@@ -144,8 +147,9 @@ public class ControlPanelActions {
     }
 
     static class AnalyzeNetworkAction extends AbstractAction {
+		private static final long serialVersionUID = -1640400027656095696L;
 
-        public AnalyzeNetworkAction(String name) {
+		public AnalyzeNetworkAction(String name) {
             super(name);
         }
 
@@ -157,8 +161,9 @@ public class ControlPanelActions {
     }
 
     static class OptimizationAction extends AbstractAction {
+		private static final long serialVersionUID = -7734362994973365550L;
 
-        public OptimizationAction(String name) {
+		public OptimizationAction(String name) {
             super(name);
         }
 
@@ -170,8 +175,9 @@ public class ControlPanelActions {
     }
     
     static class SubtractAction extends AbstractAction {
+		private static final long serialVersionUID = 963126323990960089L;
 
-        public SubtractAction(String name) {
+		public SubtractAction(String name) {
             super(name);
         }
 
@@ -206,16 +212,17 @@ public class ControlPanelActions {
         }
     }
     
-    static class ConvoluteAction extends AbstractAction {
+    static class ConvolveAction extends AbstractAction {
+		private static final long serialVersionUID = -6107536974274199642L;
 
-        public ConvoluteAction(String name) {
+		public ConvolveAction(String name) {
             super(name);
         }
 
         @Override
         public void actionPerformed(ActionEvent ae) {
             // Choose vertices and flow of interest
-            ConvoluteVerticesDialog dialog = new ConvoluteVerticesDialog();
+            ConvolveVerticesDialog dialog = new ConvolveVerticesDialog();
             dialog.display();
         }
     }

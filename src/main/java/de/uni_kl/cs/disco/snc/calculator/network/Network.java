@@ -184,12 +184,12 @@ public class Network implements Serializable {
         return output;
     }
 
-    public int convolute(int vertex1ID, int vertex2ID, int flowOfInterestID) {
-        // Compute convoluted service, add a new vertex with that service
+    public int convolve(int vertex1ID, int vertex2ID, int flowOfInterestID) {
+        // Compute convolved service, add a new vertex with that service
         // Some preconditions have to be met: 
         // (1) The vertices are direct neighbours wrt. to the flow of interest (FoI)
         // (2) There are no other flows on the path of the FoI
-        if (areConvolutable(vertex1ID, vertex2ID, flowOfInterestID)) {
+        if (areConvolvable(vertex1ID, vertex2ID, flowOfInterestID)) {
             Vertex v1 = getVertex(vertex1ID);
             Vertex v2 = getVertex(vertex2ID);
             Flow foi = getFlow(flowOfInterestID);
@@ -231,11 +231,11 @@ public class Network implements Serializable {
             removeVertex(v2);
             return convVertex.getID();
         } else {
-            throw new NetworkActionException("Vertices are not convolutable!");
+            throw new NetworkActionException("Vertices are not convolvable!");
         }
     }
 
-    public boolean areConvolutable(int vertex1ID, int vertex2ID, int flowID) {
+    public boolean areConvolvable(int vertex1ID, int vertex2ID, int flowID) {
         return true;
     }
 
