@@ -24,7 +24,6 @@ package de.uni_kl.cs.disco.snc.calculator.network;
  * @author Sebastian Henningsen
  */
 public interface NetworkListener {
-
     public void vertexAdded(Vertex newVertex);
 
     public void vertexRemoved(Vertex removedVertex);

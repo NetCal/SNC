@@ -52,7 +52,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Service;
  * @see Service
  */
 public class Vertex implements Serializable, Displayable {
-	
 	private static final long serialVersionUID = -8696545130808777213L;
 	private String alias;
 	private int ID;
@@ -63,8 +62,6 @@ public class Vertex implements Serializable, Displayable {
 	private int highest_priority;
 	private Map<Integer, Arrival> incoming;
 	private Network nw;
-	
-	//Constructor
 	
 	/**
 	 * Creates an empty node.
@@ -105,8 +102,6 @@ public class Vertex implements Serializable, Displayable {
 		this.alias = alias == null ? "" : alias;
 		this.nw = nw;
 	}
-	
-	//Methods
 	
 	/**
 	 * Adds an arrival to this node.
@@ -150,14 +145,15 @@ public class Vertex implements Serializable, Displayable {
 	 * @throws ArrivalNotAvailableException
 	 */
 	public void learnArrival(int flow_id, Arrival arrival) throws ArrivalNotAvailableException{
-
 		if(priorities.containsKey(flow_id)){
 			incoming.put(flow_id, arrival);
 		}
-		else throw new ArrivalNotAvailableException("The given arrival-flow-id does not appear in the priority list.",this);
+		else { 
+			throw new ArrivalNotAvailableException("The given arrival-flow-id does not appear in the priority list.",this);
+		}
 	}
 	
-	//Serves the prioritized flow, returns the output to the calling procedure. After this the 
+	// Serves the prioritized flow, returns the output to the calling procedure. After this the 
 	// leftover service is calculated and written into service. The served flow is removed from
 	// the priority and established_flows HashMaps. Further the next flow to be served is determined.
 	// Invoking serve() without any flows in established_incoming will result in an error.
@@ -183,11 +179,9 @@ public class Vertex implements Serializable, Displayable {
 		//TODO: Removing this check seems to break "Simple Analysis"?
 		//Checks if non-established arrivals exist (number of priority entries larger > arrival entries)
 /*		
- * 		if(incoming.size() != priorities.size()){
- *			throw new ArrivalNotAvailableException("Not all arrivals had been established",this);
- *		}
- *
- *		else{
+ 		if(incoming.size() != priorities.size()){
+			throw new ArrivalNotAvailableException("Not all arrivals had been established",this);
+		} else {
  */
 			//Calculates the output-bound
 			Arrival arrival = incoming.get(prioritizedFlowID);
@@ -219,7 +213,9 @@ public class Vertex implements Serializable, Displayable {
 			//Returns the output-bound
 			return output;
 		}
-//	}
+/*
+	}
+*/
 
 	/**
 	 * Determines which flow has the highest priority.
@@ -268,8 +264,6 @@ public class Vertex implements Serializable, Displayable {
 		
 	}
      	
-	//Copy-Operator
-	
 	public Vertex copy(){
 		Vertex copy = new Vertex(ID, service, alias, nw);
 		for(Entry<Integer, Integer> entry : priorities.entrySet()){
@@ -278,8 +272,6 @@ public class Vertex implements Serializable, Displayable {
 		}
 		return copy;
 	}
-	
-	//Getter and Setter
 	
     public void setMGFService(Service service) {
 		this.service = service;

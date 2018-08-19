@@ -44,8 +44,8 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
  * @see Arrival
  */
 public class Flow implements Serializable, Displayable {
-
     private static final long serialVersionUID = 7989846738211040015L;
+    
     private List<Integer> vertices;
     private List<Arrival> arrivals;
     private List<Integer> priorities;

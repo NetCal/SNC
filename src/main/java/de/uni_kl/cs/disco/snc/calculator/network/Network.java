@@ -62,18 +62,17 @@ import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
  * @see Hoelder
  */
 public class Network implements Serializable {
-
-    //Members
+	private static final long serialVersionUID = 695224731594099768L;
 	
-    private int FLOW_ID;
+	private int FLOW_ID;
     private int VERTEX_ID;
     private int HOELDER_ID;
+    
     private Map<Integer, Flow> flows;
     private Map<Integer, Vertex> vertices;
     private Map<Integer, Hoelder> hoelders;
+    
     private List<NetworkListener> listeners;
-
-    // Constructor
 
     public Network() {
         this(null, null, null);
@@ -88,8 +87,6 @@ public class Network implements Serializable {
         HOELDER_ID = this.hoelders.size() + 1;
         this.listeners = new ArrayList<NetworkListener>();
     }
-
-    //Methods
 
     public boolean addListener(NetworkListener l) {
         return listeners.add(l);

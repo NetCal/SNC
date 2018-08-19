@@ -30,7 +30,6 @@ package de.uni_kl.cs.disco.snc.calculator.network;
  * @see Vertex
  */
 public class ArrivalNotAvailableException extends Exception {
-
 	private static final long serialVersionUID = 7639117327707663590L;
 	
 	ArrivalNotAvailableException(String s, Vertex vertex){

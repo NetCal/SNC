@@ -24,7 +24,9 @@ package de.uni_kl.cs.disco.snc.calculator.network;
  * @author Sebastian Henningsen
  */
 public class NetworkActionException extends RuntimeException {
-    public NetworkActionException(Exception e) {
+	private static final long serialVersionUID = -3903476473689174878L;
+
+	public NetworkActionException(Exception e) {
         super(e);
     }
     
