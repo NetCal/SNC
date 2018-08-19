@@ -24,7 +24,9 @@ package de.uni_kl.cs.disco.snc.calculator.analysis;
  * @author Sebastian Henningsen
  */
 public class AnalysisException extends RuntimeException {
-    public AnalysisException(Exception e) {
+	private static final long serialVersionUID = 2085589976597613554L;
+
+	public AnalysisException(Exception e) {
         super(e);
     }
     
