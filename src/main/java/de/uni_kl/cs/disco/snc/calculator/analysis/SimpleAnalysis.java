@@ -94,7 +94,6 @@ public class SimpleAnalysis extends AbstractAnalysis {
 	 */
 	@Override
 	public Arrival analyze() throws ArrivalNotAvailableException, DeadlockException, BadInitializationException{
-		
 		// Initializes the stack of vertices, for which all arrivals are known
 		for(Map.Entry<Integer, Vertex> entry : vertices.entrySet()){
 			if(entry.getValue().canServe()) 	analyzableVertices.push(entry.getValue());
@@ -126,8 +125,8 @@ public class SimpleAnalysis extends AbstractAnalysis {
 			// Checks if the current vertex and flow are SoI and FoI respectively
 			if(current_vertex.getID() == vertex_of_interest && flowID == flow_of_interest){
 				bound = calculateBound(flows.get(flowID).getLastArrival(), current_vertex.getService());
-				System.out.println("Arrival of interest found: "+flows.get(flowID).getLastArrival().toString());
-				System.out.println("Service of interest found: "+current_vertex.getService().toString());
+				System.out.println("Arrival of interest found: " + flows.get(flowID).getLastArrival().toString());
+				System.out.println("Service of interest found: " + current_vertex.getService().toString());
 				successful = true;
 				break;
 			}
@@ -189,16 +188,17 @@ public class SimpleAnalysis extends AbstractAnalysis {
 			SymbolicFunction preparation;
 			
 			// Dependent Case
-			if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() || !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
+			if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() 
+					|| !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
 				Hoelder hoelder = nw.createHoelder();
-				preparation = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma(),hoelder), 
-						new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder)));
+				preparation = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(), service.getSigma(), hoelder), 
+					new BFunction(new AdditiveComposition(arrival.getRho(), service.getRho(), hoelder)));
 			}
 			
 			// Independent Case
 			else{
-				preparation = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma()), 
-												new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho())));	
+				preparation = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(), service.getSigma()), 
+					new BFunction(new AdditiveComposition(arrival.getRho(), service.getRho())));	
 			}
 			
 			// introduces the backlog-part in the backlog-bound as new variable. The sign must be negative!
@@ -220,20 +220,21 @@ public class SimpleAnalysis extends AbstractAnalysis {
 			System.out.println("Arrival dependencies of SoI:"+service.getArrivaldependencies().toString());
 	*/
 			// Dependent Case
-			if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() || !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
+			if(!SetUtils.getIntersection(arrival.getServicedependencies(), service.getServicedependencies()).isEmpty() 
+					|| !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
 				Hoelder hoelder = nw.createHoelder();
-				SymbolicFunction prep1 = new AdditiveComposition(arrival.getSigma(),service.getSigma(),hoelder);
-				SymbolicFunction prep2 = new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder);
+				SymbolicFunction prep1 = new AdditiveComposition(arrival.getSigma(), service.getSigma(), hoelder);
+				SymbolicFunction prep2 = new AdditiveComposition(arrival.getRho(), service.getRho(), hoelder);
 				
-				sigma = new AdditiveComposition(prep1,new BFunction(prep2));
+				sigma = new AdditiveComposition(prep1, new BFunction(prep2));
 				rho = new ScaledFunction(service.getRho(), hoelder, false);
 				System.out.println("Dependent case");
 			}
 			
 			// Independent Case
 			else{
-				sigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma()),
-						new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho())));
+				sigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(), service.getSigma()),
+						new BFunction(new AdditiveComposition(arrival.getRho(), service.getRho())));
 				rho = service.getRho();
 				System.out.println("Independent Case");
 			} 
@@ -245,15 +246,18 @@ public class SimpleAnalysis extends AbstractAnalysis {
 			SymbolicFunction givenrho;
 			
 			// Dependent Case
-			if(!SetUtils.getIntersection(arrival.getServicedependencies(),service.getServicedependencies()).isEmpty() || !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
+			if(!SetUtils.getIntersection(arrival.getServicedependencies(), service.getServicedependencies()).isEmpty() 
+					|| !SetUtils.getIntersection(service.getArrivaldependencies(), arrival.getArrivaldependencies()).isEmpty()){
 				Hoelder hoelder = nw.createHoelder();
-				givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma(),hoelder),new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho(),hoelder)));
-				givenrho = new ScaledFunction(arrival.getRho(),hoelder, false);
+				givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(), service.getSigma(), hoelder), 
+						new BFunction(new AdditiveComposition(arrival.getRho(), service.getRho(), hoelder)));
+				givenrho = new ScaledFunction(arrival.getRho(), hoelder, false);
 			}
 			
 			// Independent Case
 			else{
-				givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(),service.getSigma()),new BFunction(new AdditiveComposition(arrival.getRho(),service.getRho())));
+				givensigma = new AdditiveComposition(new AdditiveComposition(arrival.getSigma(), service.getSigma()), 
+						new BFunction(new AdditiveComposition(arrival.getRho(), service.getRho())));
 				givenrho = arrival.getRho();
 			}
 			result = new Arrival(givensigma, givenrho, nw);

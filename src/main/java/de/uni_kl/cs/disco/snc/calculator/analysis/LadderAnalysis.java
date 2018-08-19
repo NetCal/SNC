@@ -87,8 +87,8 @@ public class LadderAnalysis extends AbstractAnalysis {
         Flow foi = flows.get(flow_of_interest);
         List<Integer> foiRoute = foi.getVerticeIDs();
         int establishedVertex = flow.getCurrentVertexID();
-        // First we check whether the xflow has an established arrival at the intersection with the foi
         
+        // First we check whether the xflow has an established arrival at the intersection with the foi
         // TODO: Use the java 8 streaming api.
         // Since we have a feed forward network there can be no duplicates on the path
         // -> the simple or-check is sufficient
@@ -100,7 +100,7 @@ public class LadderAnalysis extends AbstractAnalysis {
             System.out.println("No initial arrival");
             return false;
         }
-        // Next we check whether the xflow and the foi intersect more than once
+        // Next we check whether the crossflow and the foi intersect more than once
         List<Integer> intersections = getIntersectingNodes(flow, foi);
         if (intersections.size() > 1) {
             System.out.println("More than one intersection");
@@ -136,11 +136,13 @@ public class LadderAnalysis extends AbstractAnalysis {
     }
     
     public boolean isAggregateFlow(Flow flow) {
-        // Check whether the flow has the same path as the flow of interest. TODO: Priority checking, initial arrival
+        // Check whether the flow has the same path as the flow of interest. 
+    	// TODO: Priority checking, initial arrival
         boolean isAggregate = true;
         List<Integer> route = flow.getVerticeIDs();
         Flow foi = flows.get(flow_of_interest);
         List<Integer> foiRoute = foi.getVerticeIDs();
+        
         // Routes must have the same length
         if (route.size() != foiRoute.size()) {
             isAggregate = false;
@@ -167,6 +169,7 @@ public class LadderAnalysis extends AbstractAnalysis {
         // (1) The relative priorities of the aggregate flows stay the same
         // (2) Crossflows always have the highest priority at the intersection with the aggregate flows
         // (3) The initial arrival of crossflows at the intersection with the flow of interest is known.
+    	
         // First: Test whether the network is a ladder network.
         List<Flow> rungFlows = new LinkedList<>();
         List<Flow> aggregateFlows = new LinkedList<>();
@@ -228,6 +231,7 @@ public class LadderAnalysis extends AbstractAnalysis {
             }
         }
         System.out.println("Aggregate Arrival: " + aggregatedThrough);
+        
         // Third Step: Using the concatenation result.
         Arrival bound = null;
         bound = calculateBound(flows.get(flow_of_interest).getInitialArrival(), leftoverServices, aggregatedThrough);
@@ -249,10 +253,9 @@ public class LadderAnalysis extends AbstractAnalysis {
      */
     // TODO:(Michael) Get Arrival representation for the delay- (backlog-, and output-)bound. 
     private Arrival calculateBound(Arrival arrival, List<Service> leftover_services, Arrival aggregated_through) {
-
         Arrival result;
 
-        //The result is dependent on the wished performance-bound
+        // The result is dependent on the wished performance-bound
         switch (getBoundType()) {
             // TODO:(Michael) Update this to end-to-end
             case BACKLOG:

@@ -53,16 +53,29 @@ public class SimpleEndToEndConvolutor {
 		if(nw.getVertices().size() >= 2) {
 		    // Get route of FoI
 		    List<Integer> route = flowOfInterest.getVerticeIDs();
+			StringBuffer results_str = new StringBuffer();
 		    for(int i = 0, j = 1;j < route.size() - 1;i++, j++) {
+		    	
 		        // Convolution
 		        Network convNetwork = nw.deepCopy();
 		        
 		        int newID = convNetwork.convolute(route.get(i), route.get(j), flowOfInterest.getID());
 		        vertex1ID = vertex1ID == i || vertex1ID == j ? newID : vertex1ID;
 		        vertex2ID = vertex2ID == i || vertex1ID == j ? newID : vertex2ID;
-		
-		        results.addAll(computeAllConvolutions(operations + "convolute " + convNetwork.getVertex(i).getAlias() 
-		                + " (" + i + "), " + convNetwork.getVertex(j).getAlias() + " (" + j + ")", vertex1ID, vertex2ID, convNetwork));
+
+	            results_str.setLength(0);
+				results_str.append(operations);
+				results_str.append("convolute ");
+				results_str.append(convNetwork.getVertex(i).getAlias());
+				results_str.append(" (");
+				results_str.append(Integer.toString(i));
+				results_str.append("), ");
+				results_str.append(convNetwork.getVertex(j).getAlias());
+				results_str.append(" (");
+				results_str.append(Integer.toString(j));
+				results_str.append(")");
+		        
+		        results.addAll(computeAllConvolutions(results_str.toString(), vertex1ID, vertex2ID, convNetwork));
 		        
 		        // Subtract
 		        Network subtNetwork = nw.deepCopy();
@@ -73,8 +86,16 @@ public class SimpleEndToEndConvolutor {
 		            } catch (ArrivalNotAvailableException ex) {
 		                ex.printStackTrace();
 		            }
-		            results.addAll(computeAllConvolutions(operations + "subtract " + subtNetwork.getFlow(i).getAlias() 
-		                + " (" + i + ")", vertex1ID, vertex2ID, subtNetwork));
+		            
+		            results_str.setLength(0);
+					results_str.append(operations);
+					results_str.append("subtract ");
+					results_str.append(subtNetwork.getFlow(i).getAlias() );
+					results_str.append(" (");
+					results_str.append(Integer.toString(i));
+					results_str.append(")");
+		            
+		            results.addAll(computeAllConvolutions(results_str.toString(), vertex1ID, vertex2ID, subtNetwork));
 		        }
 		    }
 		} else {
@@ -95,6 +116,6 @@ public class SimpleEndToEndConvolutor {
     // Starts new threads and finds the best result
 
 	public void findBestConvolution() {
-        
+        // TODO
     }
 }

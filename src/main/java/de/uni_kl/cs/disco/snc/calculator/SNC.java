@@ -71,10 +71,8 @@ import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
  *
  * @author Michael Beck
  * @author Sebastian Henningsen
- *
  */
 public class SNC {
-
     private final UndoRedoStack undoRedoStack;
     private static SNC singletonInstance;
     private final List<Network> networks;

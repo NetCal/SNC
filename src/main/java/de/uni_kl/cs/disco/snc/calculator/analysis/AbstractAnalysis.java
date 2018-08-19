@@ -47,11 +47,11 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
  * @author Sebastian Henningsen
  */
 public abstract class AbstractAnalysis implements Analyzer {
+	protected Network nw;
     protected Map<Integer,Vertex> vertices;
     protected Map<Integer,Flow> flows;
     protected int flow_of_interest;
     protected int vertex_of_interest;
-    protected Network nw;
 	protected BoundType BoundType;
         
 	// TODO
