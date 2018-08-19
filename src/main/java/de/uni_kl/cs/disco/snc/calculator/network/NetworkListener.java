@@ -24,17 +24,17 @@ package de.uni_kl.cs.disco.snc.calculator.network;
  * @author Sebastian Henningsen
  */
 public interface NetworkListener {
-    public void vertexAdded(Vertex newVertex);
+    void vertexAdded(Vertex newVertex);
 
-    public void vertexRemoved(Vertex removedVertex);
+    void vertexRemoved(Vertex removedVertex);
 
-    public void vertexChanged(Vertex changedVertex);
+    void vertexChanged(Vertex changedVertex);
 
-    public void flowAdded(Flow newFlow);
+    void flowAdded(Flow newFlow);
 
-    public void flowRemoved(Flow removedFlow);
+    void flowRemoved(Flow removedFlow);
 
-    public void flowChanged(Flow changedFlow);
+    void flowChanged(Flow changedFlow);
     
-    public void clear();
+    void clear();
 }
