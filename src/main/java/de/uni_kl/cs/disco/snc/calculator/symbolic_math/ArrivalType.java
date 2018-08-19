@@ -25,7 +25,6 @@ package de.uni_kl.cs.disco.snc.calculator.symbolic_math;
  * @author Sebastian Henningsen
  */
 public enum ArrivalType {
-    
     CONSTANT_RATE {
        @Override
        public String toString() {

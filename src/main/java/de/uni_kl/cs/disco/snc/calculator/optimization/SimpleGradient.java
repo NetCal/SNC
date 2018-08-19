@@ -47,7 +47,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @author Sebastian Henningsen
  */
 public class SimpleGradient extends AbstractOptimizer {
-
 	enum Change{
 		THETA_DEC, THETA_INC, HOELDER_P, HOELDER_Q, NOTHING
 	};
@@ -63,10 +62,9 @@ public class SimpleGradient extends AbstractOptimizer {
         
     @Override
     public double minimize(double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-	        
     	bound.prepare();
     	
-    	// Initilializes the list of Hoelder-Parameters
+    	// Initializes the list of Hoelder-Parameters
     	Map<Integer, Hoelder> allparameters = bound.getHoelderParameters();
 	        
         for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()) {
@@ -211,12 +209,12 @@ public class SimpleGradient extends AbstractOptimizer {
 		
 		double result;
 		
-		//Initializes the list of Hoelder-Parameters...
+		// Initializes the list of Hoelder-Parameters...
 		Map<Integer, Hoelder> allparameters = new HashMap<>(0);
 		allparameters.putAll(input.getSigma().getParameters());
 		allparameters.putAll(input.getRho().getParameters());
 			
-		//If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
+		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
 		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
                     allparameters.get(allparameters.size()).setPValue(bound);
                     allparameters.remove(allparameters.size());
@@ -225,7 +223,7 @@ public class SimpleGradient extends AbstractOptimizer {
 			entry.getValue().setPValue(2);
 		}
 		
-		//Initializes theta
+		// Initializes theta
 		double max_theta = input.getThetastar();
 		double sigmapart;
 		double rhopart;
@@ -237,8 +235,7 @@ public class SimpleGradient extends AbstractOptimizer {
 		
 		switch(boundtype){
 			case BACKLOG:
-				
-				//Computes initial value
+				// Computes initial value
 				double backlogprob;
 				double new_backlogprob;
 				try{
@@ -250,7 +247,7 @@ public class SimpleGradient extends AbstractOptimizer {
 				while(improved){
 					improved = false;
 					change = SimpleGradient.Change.NOTHING;
-					//Check if decreasing theta leads to a better result
+					// Check if decreasing theta leads to a better result
 					if(theta > thetagranularity){
 						
 						theta = theta - thetagranularity;
@@ -271,7 +268,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta + thetagranularity;
 					}
 					
-					//Check if increasing theta leads to a better result
+					// Check if increasing theta leads to a better result
 					if(theta < max_theta - thetagranularity){
 						theta = theta + thetagranularity;
 						try{
@@ -291,7 +288,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta - thetagranularity;
 					}
 					
-					//Check each neighbors resulting from decreasing the P-Value of Hoelder parameters
+					// Check each neighbors resulting from decreasing the P-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_p_value = entry.getValue().getPValue();
 						if(entry.getValue().getPValue() < 2){
@@ -318,7 +315,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						entry.getValue().setPValue(old_p_value);
 					}
 					
-					//Check each neighbor by decreasing the Q-Value of Hoelder parameters
+					// Check each neighbor by decreasing the Q-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_q_value = entry.getValue().getQValue();
 						if(entry.getValue().getPValue() < 2){
@@ -370,7 +367,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						improved = false;
 						break;
 					}
-					//System.out.println("Theta: "+theta+" Hoelder: "+allparameters.toString()+" Bound: "+backlogprob);
+					// System.out.println("Theta: "+theta+" Hoelder: "+allparameters.toString()+" Bound: "+backlogprob);
 				}
 				
 				result = backlogprob;
@@ -378,9 +375,8 @@ public class SimpleGradient extends AbstractOptimizer {
 				break;
 				
 			case DELAY:
-				
 				//Computes initial value
-                                int delay = (int)Math.round(Math.ceil(bound));
+                int delay = (int)Math.round(Math.ceil(bound));
 				double delayprob;
 				double new_delayprob;
 				try{
@@ -393,7 +389,7 @@ public class SimpleGradient extends AbstractOptimizer {
 				while(improved){
 					improved = false;
 					change = SimpleGradient.Change.NOTHING;
-					//Check if decreasing theta leads to a better result
+					// Check if decreasing theta leads to a better result
 					if(theta > thetagranularity){
 						theta = theta - thetagranularity;
 						try{
@@ -409,7 +405,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta + thetagranularity;
 					}
 					
-					//Check if increasing theta leads to a better result
+					// Check if increasing theta leads to a better result
 					if(theta < max_theta - thetagranularity){
 						theta = theta + thetagranularity;
 						try{
@@ -425,7 +421,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta - thetagranularity;
 					}
 					
-					//Check each neighbor by decreasing the P-Value of Hoelder parameters
+					// Check each neighbor by decreasing the P-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_p_value = entry.getValue().getPValue();
 						if(entry.getValue().getPValue() < 2){
@@ -451,7 +447,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						entry.getValue().setPValue(old_p_value);
 					}
 					
-					//Check each neighbor by decreasing the Q-Value of Hoelder parameters
+					// Check each neighbor by decreasing the Q-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_q_value = entry.getValue().getQValue();
 						if(entry.getValue().getPValue() < 2){
@@ -501,16 +497,16 @@ public class SimpleGradient extends AbstractOptimizer {
 						improved = false;
 						break;
 					}
-					//System.out.println("Theta: "+theta+" Hoelder: "+allparameters.toString()+" Bound: "+delayprob);
+					// System.out.println("Theta: "+theta+" Hoelder: "+allparameters.toString()+" Bound: "+delayprob);
 				}
-				
 				result = delayprob;
-				
 				break;
+				
 			case OUTPUT:
 				//In case of an output-bound no result is needed
 				result = Double.NaN;
 				break;
+				
 			default:
 				result = 0;
 				break;
@@ -521,15 +517,14 @@ public class SimpleGradient extends AbstractOptimizer {
 
 	@Override
 	public double ReverseBound(Arrival input, Boundtype boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-
 		double result;
 		
-		//Initializes the list of Hoelder-Parameters...
+		// Initializes the list of Hoelder-Parameters...
 		HashMap<Integer, Hoelder> allparameters = new HashMap<Integer, Hoelder>(0);
 		allparameters.putAll(input.getSigma().getParameters());
 		allparameters.putAll(input.getRho().getParameters());
 			
-		//If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
+		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
 		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(0);
 			allparameters.remove(allparameters.size());
@@ -539,7 +534,7 @@ public class SimpleGradient extends AbstractOptimizer {
 			entry.getValue().setPValue(2);
 		}
 		
-		//Initializes theta
+		// Initializes theta
 		double max_theta = input.getThetastar();
 		double sigmapart;
 		double rhopart;
@@ -551,8 +546,7 @@ public class SimpleGradient extends AbstractOptimizer {
 		
 		switch(boundtype){
 			case BACKLOG:
-				
-				//Computes initial value
+				// Computes initial value
 				double backlogvalue;
 				double new_backlog;
 				try{
@@ -565,7 +559,7 @@ public class SimpleGradient extends AbstractOptimizer {
 				while(improved){
 					improved = false;
 					change = SimpleGradient.Change.NOTHING;
-					//Check if decreasing theta leads to a better result
+					// Check if decreasing theta leads to a better result
 					if(theta > thetagranularity){
 						
 						theta = theta - thetagranularity;
@@ -587,7 +581,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta + thetagranularity;
 					}
 					
-					//Check if increasing theta leads to a better result
+					// Check if increasing theta leads to a better result
 					if(theta < max_theta - thetagranularity){
 						theta = theta + thetagranularity;
 						try{
@@ -608,7 +602,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta - thetagranularity;
 					}
 					
-					//Check each neighbors resulting from decreasing the P-Value of Hoelder parameters
+					// Check each neighbors resulting from decreasing the P-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_p_value = entry.getValue().getPValue();
 						if(entry.getValue().getPValue() < 2){
@@ -636,7 +630,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						entry.getValue().setPValue(old_p_value);
 					}
 					
-					//Check each neighbor by decreasing the Q-Value of Hoelder parameters
+					// Check each neighbor by decreasing the Q-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_q_value = entry.getValue().getQValue();
 						if(entry.getValue().getPValue() < 2){
@@ -691,14 +685,11 @@ public class SimpleGradient extends AbstractOptimizer {
 					}
 					System.out.println("Theta: "+theta+" Hoelder: "+allparameters.toString()+" Bound: "+backlogvalue);
 				}
-				
 				result = backlogvalue;
-				
 				break;
 				
 			case DELAY:
-				
-				//Computes initial value
+				// Computes initial value
 				double delayvalue;
 				double new_delay;
 				try{
@@ -713,7 +704,7 @@ public class SimpleGradient extends AbstractOptimizer {
 				while(improved){
 					improved = false;
 					change = SimpleGradient.Change.NOTHING;
-					//Check if decreasing theta leads to a better result
+					// Check if decreasing theta leads to a better result
 					if(theta > thetagranularity){
 						theta = theta - thetagranularity;
 						try{
@@ -731,7 +722,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta + thetagranularity;
 					}
 					
-					//Check if increasing theta leads to a better result
+					// Check if increasing theta leads to a better result
 					if(theta < max_theta - thetagranularity){
 						theta = theta + thetagranularity;
 						try{
@@ -749,7 +740,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						theta = theta - thetagranularity;
 					}
 					
-					//Check each neighbor by decreasing the P-Value of Hoelder parameters
+					// Check each neighbor by decreasing the P-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_p_value = entry.getValue().getPValue();
 						if(entry.getValue().getPValue() < 2){
@@ -777,7 +768,7 @@ public class SimpleGradient extends AbstractOptimizer {
 						entry.getValue().setPValue(old_p_value);
 					}
 					
-					//Check each neighbor by decreasing the Q-Value of Hoelder parameters
+					// Check each neighbor by decreasing the Q-Value of Hoelder parameters
 					for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
 						double old_q_value = entry.getValue().getQValue();
 						if(entry.getValue().getPValue() < 2){
@@ -833,10 +824,12 @@ public class SimpleGradient extends AbstractOptimizer {
 				}
 				result = delayvalue;
 				break;
+				
 			case OUTPUT:
-				//In case of an output-bound no result is needed
+				// In case of an output-bound no result is needed
 				result = Double.NaN;
 				break;
+				
 			default:
 				result = 0;
 				break;

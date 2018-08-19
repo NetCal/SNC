@@ -58,102 +58,99 @@ public class SimpleOptimizer extends AbstractOptimizer {
 	
     @Override
     public double minimize(double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-        
     	if(bound.getMaximumTheta() == Double.POSITIVE_INFINITY){
     		throw new ThetaOutOfBoundException("DEADLOCK: There is no maximal theta given for this optimization (check arrival models). Try Gradient Heuristic.");
-    	}
-    	else{
-    	bound.prepare();
-        // Initilializes the list of Hoelder-Parameters
-        Map<Integer, Hoelder> allparameters = bound.getHoelderParameters();
-        IncrementList hoelderlist = new IncrementList(hoeldergranularity);
-        for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
-            hoelderlist.add(entry.getValue());
-        }
-        
-        for(int i=0; i < hoelderlist.size(); i++){
-            hoelderlist.get(i).setPValue(2);
-        }
-        
-        //Initializes further values
-        maxTheta = bound.getMaximumTheta();
-        System.out.println("Max Theta: " + maxTheta);
-        double theta = thetagranularity;
-
-        boolean breakCondition = false;
-        
-        //Computes initial value
-        double optValue;
-        try {
-            optValue = bound.evaluate(theta);
-        } catch(ServerOverloadException e) {
-            optValue = Double.POSITIVE_INFINITY;
-        }
-
-        while(theta < maxTheta) {
-            try {
-                optValue = Math.min(bound.evaluate(theta), optValue);
-                theta += thetagranularity;
-            } catch(ServerOverloadException e) {
-                theta += thetagranularity;
-            }
-        }
-
-        //Resets
-        theta = thetagranularity;
-        breakCondition = false;
-
-        //Tests Hoelder coefficients in one direction
-
-        while(!breakCondition) {
-            breakCondition = !hoelderlist.PDecrement();
-            maxTheta = bound.getMaximumTheta();			
-
-            while(theta < maxTheta) {
-                try {
-                    optValue = Math.min(optValue, bound.evaluate(theta));
-                    theta = theta+thetagranularity;
-                } catch(ServerOverloadException | ThetaOutOfBoundException e) {
-                    theta = theta+thetagranularity;
-                }
-            }
-            theta = thetagranularity;
-        }
-
-        //Resets
-        breakCondition = false;
-
-        //Tests Hoelder coefficients in other direction
-
-        while(!breakCondition) {
-            breakCondition = !hoelderlist.QDecrement();
-            maxTheta = bound.getMaximumTheta();
-
-            while(theta < maxTheta) {
-                try {
-                    Math.min(optValue, bound.evaluate(theta));
-                    theta = theta+thetagranularity;
-                } catch(ServerOverloadException | ThetaOutOfBoundException e) {
-                    theta = theta+thetagranularity;
-                }
-            }
-            theta = thetagranularity;
-        }
-        return optValue;
+	    } else {
+		    	bound.prepare();
+		        // Initializes the list of Hoelder-Parameters
+		        Map<Integer, Hoelder> allparameters = bound.getHoelderParameters();
+		        IncrementList hoelderlist = new IncrementList(hoeldergranularity);
+		        for(Map.Entry<Integer, Hoelder> entry : allparameters.entrySet()){
+		            hoelderlist.add(entry.getValue());
+		        }
+	        
+		        for(int i=0; i < hoelderlist.size(); i++){
+		            hoelderlist.get(i).setPValue(2);
+		        }
+	        
+	        // Initializes further values
+	        maxTheta = bound.getMaximumTheta();
+	        System.out.println("Max Theta: " + maxTheta);
+	        double theta = thetagranularity;
+	
+	        boolean breakCondition = false;
+	        
+	        // Computes initial value
+	        double optValue;
+	        try {
+	            optValue = bound.evaluate(theta);
+	        } catch(ServerOverloadException e) {
+	            optValue = Double.POSITIVE_INFINITY;
+	        }
+	
+	        while(theta < maxTheta) {
+	            try {
+	                optValue = Math.min(bound.evaluate(theta), optValue);
+	                theta += thetagranularity;
+	            } catch(ServerOverloadException e) {
+	                theta += thetagranularity;
+	            }
+	        }
+	
+	        // Resets
+	        theta = thetagranularity;
+	        breakCondition = false;
+	
+	        // Tests Hoelder coefficients in one direction
+	
+	        while(!breakCondition) {
+	            breakCondition = !hoelderlist.PDecrement();
+	            maxTheta = bound.getMaximumTheta();			
+	
+	            while(theta < maxTheta) {
+	                try {
+	                    optValue = Math.min(optValue, bound.evaluate(theta));
+	                    theta = theta+thetagranularity;
+	                } catch(ServerOverloadException | ThetaOutOfBoundException e) {
+	                    theta = theta+thetagranularity;
+	                }
+	            }
+	            theta = thetagranularity;
+	        }
+	
+	        // Resets
+	        breakCondition = false;
+	
+	        // Tests Hoelder coefficients in other direction
+	
+	        while(!breakCondition) {
+	            breakCondition = !hoelderlist.QDecrement();
+	            maxTheta = bound.getMaximumTheta();
+	
+	            while(theta < maxTheta) {
+	                try {
+	                    Math.min(optValue, bound.evaluate(theta));
+	                    theta = theta+thetagranularity;
+	                } catch(ServerOverloadException | ThetaOutOfBoundException e) {
+	                    theta = theta+thetagranularity;
+	                }
+	            }
+	            theta = thetagranularity;
+	        }
+	        return optValue;
     	}
     }
         
 	@Override
 	public double ReverseBound(Arrival input, Boundtype boundtype, double violation_probability, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-		
 		double result;
 		
-		//Initializes the IncrementList of Hoelder-Parameters...
+		// Initializes the IncrementList of Hoelder-Parameters...
 		HashMap<Integer, Hoelder> allparameters = new HashMap<Integer, Hoelder>(0);
 		allparameters.putAll(input.getSigma().getParameters());
 		allparameters.putAll(input.getRho().getParameters());
 		
-		//If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
+		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
 		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(0);
 			allparameters.remove(allparameters.size());
@@ -168,7 +165,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 			hoelderlist.get(i).setPValue(2);
 		}
 		
-		//Initializes further values
+		// Initializes further values
 		double max_theta = input.getThetastar();
 		double sigmapart;
 		double theta = thetagranularity;
@@ -177,8 +174,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 		
 		switch(boundtype){
 			case BACKLOG:
-				
-				//Computes initial value
+				// Computes initial value
 				double backlogvalue;
 				try{
 					sigmapart = 1/theta*Math.log(input.evaluate(theta, 0, 0));
@@ -199,11 +195,11 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					}
 				}
 				
-				//Resets
+				// Resets
 				theta = thetagranularity;
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in one direction
+				// Tests Hoelder coefficients in one direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.PDecrement();
@@ -222,15 +218,13 @@ public class SimpleOptimizer extends AbstractOptimizer {
 							theta = theta+thetagranularity;
 						}
 					}
-					
 					theta = thetagranularity;
-					
 				}
 				
-				//Resets
+				// Resets
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in other direction
+				// Tests Hoelder coefficients in other direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.QDecrement();
@@ -249,18 +243,13 @@ public class SimpleOptimizer extends AbstractOptimizer {
 							theta = theta+thetagranularity;
 						}
 					}
-					
 					theta = thetagranularity;
-					
 				}
-				
 				result = backlogvalue;
-				
 				break;
 				
 			case DELAY:
-				
-				//Computes initial value
+				// Computes initial value
 				double delayvalue;
 				double rhopart;
 				try{
@@ -286,12 +275,11 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					}
 				}
 				
-				//Resets
+				// Resets
 				theta = thetagranularity;
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in one direction
-				
+				// Tests Hoelder coefficients in one direction
 				while(!break_condition){
 					break_condition = !hoelderlist.PDecrement();
 					max_theta = input.getThetastar();
@@ -311,16 +299,13 @@ public class SimpleOptimizer extends AbstractOptimizer {
 							theta = theta+thetagranularity;
 						}
 					}
-					
 					theta = thetagranularity;
-					
 				}
 				
-				//Resets
+				// Resets
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in other direction
-				
+				// Tests Hoelder coefficients in other direction
 				while(!break_condition){
 					break_condition = !hoelderlist.QDecrement();
 					max_theta = input.getThetastar();
@@ -340,18 +325,16 @@ public class SimpleOptimizer extends AbstractOptimizer {
 							theta = theta+thetagranularity;
 						}
 					}
-					
 					theta = thetagranularity;
-					
 				}
-				
 				result = delayvalue;
-				
 				break;
+				
 			case OUTPUT:
-				//In case of an output-bound no result is needed
+				// In case of an output-bound no result is needed
 				result = Double.NaN;
 				break;
+				
 			default:
 				result = 0;
 				break;
@@ -361,16 +344,15 @@ public class SimpleOptimizer extends AbstractOptimizer {
 	
 	@Override
 	public double Bound(Arrival input, Boundtype boundtype, double bound, double thetagranularity, double hoeldergranularity) throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-		
 		double result;
 		
-		//Initializes the IncrementList of Hoelder-Parameters...
+		// Initializes the IncrementList of Hoelder-Parameters...
 		double thetastar = thetagranularity;
 		HashMap<Integer, Hoelder> allparameters = new HashMap<Integer, Hoelder>(0);
 		allparameters.putAll(input.getSigma().getParameters());
 		allparameters.putAll(input.getRho().getParameters());
 		
-		//If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
+		// If needed, the parameter, which represents the backlog, must be separated from the other Hoelder parameters
 		if(boundtype == AbstractAnalysis.Boundtype.BACKLOG){
 			allparameters.get(allparameters.size()).setPValue(bound);
 			allparameters.remove(allparameters.size());
@@ -385,7 +367,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 			hoelderlist.get(i).setPValue(2);
 		}
 		
-		//Initializes further values
+		// Initializes further values
 		double max_theta = input.getThetastar();
 		
 		System.out.println("max-theta: "+max_theta);
@@ -394,8 +376,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 		
 		switch(boundtype){
 			case BACKLOG:
-				
-				//Computes initial value
+				// Computes initial value
 				double backlogvalue;
 				try{
 					backlogvalue = input.evaluate(thetastar, 0, 0);
@@ -418,11 +399,11 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					}
 				}
 				
-				//Resets
+				// Resets
 				thetastar = thetagranularity;
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in one direction
+				// Tests Hoelder coefficients in one direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.PDecrement();
@@ -448,10 +429,10 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					
 				}
 				
-				//Resets
+				// Resets
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in other direction
+				// Tests Hoelder coefficients in other direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.QDecrement();
@@ -482,8 +463,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 				break;
 				
 			case DELAY:
-				
-				//Computes initial value
+				// Computes initial value
 				int delay = (int) Math.round(Math.ceil(bound));
 				double delayvalue;
 				try{
@@ -504,11 +484,11 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					}
 				}
 				
-				//Resets
+				// Resets
 				thetastar = thetagranularity;
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in one direction
+				// Tests Hoelder coefficients in one direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.PDecrement();
@@ -528,10 +508,10 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					
 				}
 				
-				//Resets
+				// Resets
 				break_condition = false;
 				
-				//Tests Hoelder coefficients in other direction
+				// Tests Hoelder coefficients in other direction
 				
 				while(!break_condition){
 					break_condition = !hoelderlist.QDecrement();
@@ -564,8 +544,6 @@ public class SimpleOptimizer extends AbstractOptimizer {
 		}
 		return result;
 	}
-
-
 	
 	/**
 	 * A helper class, which gives a method to rotate through all
@@ -605,8 +583,8 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					this.get(i).setPValue(2);
 				}
 			}
-			//If all Hoelder-coefficients are reset stop_it is false!
-			//In all other cases stop_it is true and a new Hoelder configuration was established.
+			// If all Hoelder-coefficients are reset stop_it is false!
+			// In all other cases stop_it is true and a new Hoelder configuration was established.
 			return stop_it;
 		}
 		
@@ -621,8 +599,8 @@ public class SimpleOptimizer extends AbstractOptimizer {
 					this.get(i).setQValue(2);
 				}
 			}
-			//If all Hoelder-coefficients are reset stop_it is false!
-			//In all other cases stop_it is true and a new Hoelder configuration was established.
+			// If all Hoelder-coefficients are reset stop_it is false!
+			// In all other cases stop_it is true and a new Hoelder configuration was established.
 			return stop_it;
 		}
 		

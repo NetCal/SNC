@@ -39,17 +39,13 @@ import java.util.Map;
  * the adding is proceeded normally (stochastically independent
  * case: <code>HoelderID = 0</code>) or with an H�lder-coefficient
  * (stochastically dependent  case: <code>HoelderID != 0</code>).
+ * 
  * @author Michael Beck
+ * 
  * @see SymbolicFunction
- *
  */
 public class AdditiveComposition extends BinaryFunction implements SymbolicFunction {
-	
-	//Members
-
 	private static final long serialVersionUID = -5148906758692197626L;
-	
-	//Constructors
 	
 	/**
 	 * Constructs an <code>AddedFunctions</code> entity. If 
@@ -91,8 +87,6 @@ public class AdditiveComposition extends BinaryFunction implements SymbolicFunct
 	public AdditiveComposition(SymbolicFunction first, SymbolicFunction second, Hoelder hoelder){
 	    super(first, second, hoelder);
 	}
-	
-	//Methods
 
 	/**
 	 * Calculates the value of the resulting function at theta 
@@ -111,7 +105,7 @@ public class AdditiveComposition extends BinaryFunction implements SymbolicFunct
 	 * 
      * @throws de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException
      * @throws de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException 
-s	 */
+	 */
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
@@ -161,7 +155,20 @@ s	 */
 	 */
 	@Override
 	public String toString(){
-	    return (hoelder == null ? (first.toString() + " + " + second.toString()) 
-		    : (first.toString()+"+_dep("+hoelder.getHoelderID()+")"+second.toString()) );
+		StringBuffer add_str = new StringBuffer();
+
+		add_str.append(first.toString());
+		add_str.append(" +");
+		
+		if(hoelder != null) {
+			add_str.append("_dep(");
+			add_str.append(hoelder.getHoelderID());
+			add_str.append(")");
+		}
+
+		add_str.append(" ");
+		add_str.append(second.toString());
+		
+		return add_str.toString();
 	}
 }

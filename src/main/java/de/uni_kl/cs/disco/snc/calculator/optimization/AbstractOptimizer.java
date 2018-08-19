@@ -40,7 +40,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @author Sebastian Henningsen
  */
 public abstract class AbstractOptimizer implements Optimizer {
-
     /**
      * The bound-to-be-optimized
      */
@@ -92,10 +91,13 @@ public abstract class AbstractOptimizer implements Optimizer {
 	 * @param bound the bound on the backlog or delay
 	 * @param thetagranularity
 	 * @param hoeldergranularity
+	 * 
 	 * @return a bound on the violation probability
+	 * 
 	 * @throws ParameterMismatchException 
 	 * @throws ThetaOutOfBoundException 
-	 * @throws ServerOverloadException 
+	 * @throws ServerOverloadException
+	 *  
 	 * @deprecated Functionality is now covered by @link minimize
 	 */
     @Deprecated

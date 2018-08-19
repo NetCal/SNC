@@ -32,7 +32,6 @@ package de.uni_kl.cs.disco.snc.calculator.symbolic_math;
  * @see FunctionIF
  */
 public class ParameterMismatchException extends Exception {
-
 	private static final long serialVersionUID = 2278960541224825230L;
 
     public ParameterMismatchException(String s){

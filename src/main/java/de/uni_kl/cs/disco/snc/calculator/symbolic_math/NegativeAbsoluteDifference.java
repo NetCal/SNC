@@ -47,12 +47,7 @@ import java.util.Map;
  * @see SymbolicFunction
  */
 public class NegativeAbsoluteDifference extends BinaryFunction implements SymbolicFunction{
-	
-	//Members
-
 	private static final long serialVersionUID = -3367229262199782289L;
-	
-	//Constructors
 	
 	/**
 	 * Constructs an <code>NegAbsDiffFunction</code> entity. If 
@@ -95,8 +90,6 @@ public class NegativeAbsoluteDifference extends BinaryFunction implements Symbol
 	    super(first, second, hoelder);
 	}
 
-	//Methods
-	
 	/**
 	 * Calculates the value of the resulting function at theta 
 	 * (first entry in <code>parameters</code>), with given 
@@ -147,8 +140,9 @@ public class NegativeAbsoluteDifference extends BinaryFunction implements Symbol
 
 		if(first.getValue(theta1, given1) > second.getValue(theta2, given2)){
 			return second.getValue(theta2, given2) - first.getValue(theta1, given1);
+		} else {
+			return first.getValue(theta1, given1) - second.getValue(theta2, given2);
 		}
-		else return first.getValue(theta1, given1) - second.getValue(theta2, given2);
 	*/
 	    if(checkForParameterMismatch(parameters))
 		throw new ParameterMismatchException("Total number of parameters does not match for atom functions (added)");

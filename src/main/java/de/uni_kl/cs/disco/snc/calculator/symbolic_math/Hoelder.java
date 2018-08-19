@@ -26,15 +26,10 @@ import java.io.Serializable;
  * @author Sebastian Henningsen
  */
 public class Hoelder implements Serializable {
-
-	//Members
-	
 	private static final long serialVersionUID = 2169450349608663397L;
 	private int hoelder_id;
 	private double p_value;
 	private double q_value;
-	
-	//Constructors
 	
 	/**
 	 * Creates a dummy Hoelder
@@ -62,15 +57,21 @@ public class Hoelder implements Serializable {
 			this.p_value = 1/(1-1/value);
 		}
 	}
-
-	//Methods
 	
 	@Override
 	public String toString(){
-		return "p-value: "+p_value+"   q-value: "+q_value;
+		StringBuffer hoelder_str = new StringBuffer();
+
+		hoelder_str.append("p-value:");
+		hoelder_str.append(" ");
+		hoelder_str.append(Double.toString(p_value));
+		hoelder_str.append("   ");
+		hoelder_str.append("q-value:");
+		hoelder_str.append(" ");
+		hoelder_str.append(Double.toString(q_value));
+		
+		return hoelder_str.toString();
 	}
-	
-	//Getter and Setter
 	
 	public int getHoelderID() {
 		return hoelder_id;

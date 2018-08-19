@@ -28,7 +28,6 @@ import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
  * @author Sebastian Henningsen
  */
 public class OptimizationFactory {
-    
     /**
      * Creates an instance of the chosen @link OptimizationType
      *  

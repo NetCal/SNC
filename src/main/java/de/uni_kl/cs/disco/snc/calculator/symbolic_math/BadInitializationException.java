@@ -33,13 +33,9 @@ package de.uni_kl.cs.disco.snc.calculator.symbolic_math;
  * @author Michael Beck
  */
 public class BadInitializationException extends Exception {
-
-	//Members
-	
 	private static final long serialVersionUID = -2904109072521845677L;
-	double initvalue;
 	
-	//Constructor
+	double initvalue;
 	
 	public BadInitializationException(String s, double initvalue){
 		super(s);

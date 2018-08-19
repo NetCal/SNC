@@ -25,7 +25,6 @@ package de.uni_kl.cs.disco.snc.calculator.optimization;
  * @author Sebastian Henningsen
  */
 public enum OptimizationType {
-
     /**
      * The gradient heuristic is the recommended optimization technique at the moment.
      */

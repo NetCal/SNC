@@ -34,7 +34,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.StationaryTBSig
  * @author Sebastian Henningsen
  */
 public class ArrivalFactory {
-
     public static Arrival buildConstantRate(double rate) {
         SymbolicFunction sigma = new ConstantFunction(0);
         SymbolicFunction rho = new ConstantFunction(rate);

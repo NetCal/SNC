@@ -33,7 +33,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @author Sebastian Henningsen
  */
 public interface Optimizable {
-
     /**
      * Called at the beginning of optimization, used for parameter extraction
      * in the @link BacklogBound

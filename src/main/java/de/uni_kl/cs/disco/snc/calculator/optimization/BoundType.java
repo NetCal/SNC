@@ -26,7 +26,6 @@ package de.uni_kl.cs.disco.snc.calculator.optimization;
  * @author Sebastian Henningsen
  */
 public enum BoundType {
-
     /**
      * The backlog bound
      */

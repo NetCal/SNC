@@ -57,17 +57,15 @@ import de.uni_kl.cs.disco.utils.SetUtils;
  * @see SymbolicFunction
  */
 public class Arrival implements Serializable {
-	
-	//Members
-	
 	private static final long serialVersionUID = 1079479343537123673L;
+	
 	private SymbolicFunction rho;
 	private SymbolicFunction sigma;
+	
 	private Set<Integer> Arrivaldependencies;
 	private Set<Integer> Servicedependencies;
-        private Network nw; // TODO: Maybe exchange for Node/Flow
-	
-	//Constructors
+
+	private Network nw; // TODO: Maybe exchange for Node/Flow
 	
 	/**
 	 * Creates an <code>Arrival</code> instance, with 
@@ -81,7 +79,7 @@ public class Arrival implements Serializable {
 		sigma = new ConstantFunction(0);
 		Arrivaldependencies = new HashSet<>();
 		Servicedependencies = new HashSet<>();
-                this.nw = nw;
+		this.nw = nw;
 	}
 
 	/**
@@ -100,7 +98,7 @@ public class Arrival implements Serializable {
 		this.sigma = sigma;
 		Arrivaldependencies = new HashSet<Integer>();
 		Servicedependencies = new HashSet<Integer>();
-                this.nw = nw;
+		this.nw = nw;
 	}
 	
 	/**
@@ -127,10 +125,8 @@ public class Arrival implements Serializable {
 		Arrivaldependencies = new HashSet<Integer>();
 		Arrivaldependencies.add(flow_id);
 		Servicedependencies = new HashSet<Integer>();
-                this.nw = nw;
+		this.nw = nw;
 	}
-	
-	//Methods
 	
 	/**
 	 * Adds a stochastic dependency between this instance and some 
@@ -198,7 +194,6 @@ public class Arrival implements Serializable {
 	 */
 	public double evaluate(double theta, Map<Integer, Hoelder> sigmaparameters, Map<Integer, Hoelder> rhoparameters, int n, int m)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-		
 		double value;
 		
 		try{
@@ -207,8 +202,8 @@ public class Arrival implements Serializable {
 		catch (ParameterMismatchException e){
 			value = Double.NaN;
 			System.out.println("Parameter Mismatch Error: "+e.getMessage());
-			System.out.println("Possible reasons: The network is not stable, " +
-					"\ni.e. at least one node has not enough capacity to serve its arrivals.");
+			System.out.println("Possible reasons: The network is not stable, " + "\n" + 
+					"i.e. at least one node has not enough capacity to serve its arrivals.");
 		}
 		return value;
 	}
@@ -231,7 +226,6 @@ public class Arrival implements Serializable {
 	 * @return the multiplexed arrival
 	 */
 	public Arrival multiplex(Arrival arrival1, Arrival arrival2){
-		
 		Arrival arrival;
 		
 		//Dependent case
@@ -271,7 +265,6 @@ public class Arrival implements Serializable {
 	 * @return the output of the service element
 	 */
 	public Arrival output(Arrival arrival, Service service){
-		
 		Arrival output;
 
 		//Dependent case
@@ -312,15 +305,16 @@ public class Arrival implements Serializable {
 	 */
 	@Override
 	public String toString(){
+		StringBuffer arrival_str = new StringBuffer();
 		
-		String first = sigma.toString();
-		String second = rho.toString();
+		arrival_str.append("(");
+		arrival_str.append(sigma.toString());
+		arrival_str.append(",");
+		arrival_str.append(rho.toString());
+		arrival_str.append(")");
 		
-		String output = "("+first+","+second+")";
-		return output;
+		return arrival_str.toString();
 	}
-	
-	//Getter and Setter
 	
 	public double getThetastar() {
 		return Math.min(rho.getmaxTheta(), sigma.getmaxTheta());

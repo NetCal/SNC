@@ -32,12 +32,15 @@ import java.util.Set;
  * @author Sebastian Henningsen
  */
 public abstract class BinaryFunction implements SymbolicFunction {
-
-    SymbolicFunction first;
-    SymbolicFunction second;
+	private static final long serialVersionUID = 97304677458400403L;
+	
+	protected SymbolicFunction first;
+    protected SymbolicFunction second;
+    
     private Map<Integer, Hoelder> firstParameters;
     private Map<Integer, Hoelder> secondParameters;
-    Hoelder hoelder;
+    
+    protected Hoelder hoelder;
 
     public BinaryFunction(SymbolicFunction first, SymbolicFunction second) {
 		this.first = first;

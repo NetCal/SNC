@@ -37,7 +37,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @author Michael Beck
  */
 public class BacklogBound implements Optimizable {
-    
     private Arrival input;
     private double bound;
     private Map<Integer, Hoelder> allHoelders;

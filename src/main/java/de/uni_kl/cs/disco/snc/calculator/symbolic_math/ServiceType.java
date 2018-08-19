@@ -24,7 +24,6 @@ package de.uni_kl.cs.disco.snc.calculator.symbolic_math;
  * @author Sebastian Henningsen
  */
 public enum ServiceType {
-
     CONSTANT {
         @Override
         public String toString() {

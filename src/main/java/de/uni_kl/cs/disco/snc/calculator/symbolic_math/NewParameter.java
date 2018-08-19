@@ -37,13 +37,9 @@ import java.util.Map;
  * @see SymbolicFunction
  */
 public class NewParameter implements SymbolicFunction {
-
-	//Members
-	
 	private static final long serialVersionUID = 8098072874403146679L;
-	private Hoelder hoelder;
 	
-	//Constructors
+	private Hoelder hoelder;
 	
 	/**
 	 * A new parameter always gets a fresh parameter_id from the 
@@ -53,8 +49,6 @@ public class NewParameter implements SymbolicFunction {
 	public NewParameter(Hoelder hoelder){
 		this.hoelder = hoelder;
 	}
-	
-	//Methods 
 	
 	/**
 	 * Just returns the value of <code>parameters[1]</code>. The
@@ -99,7 +93,7 @@ public class NewParameter implements SymbolicFunction {
 
     @Override
 	public Map<Integer, Hoelder> getParameters() {
-		HashMap<Integer, Hoelder> parameter_ids = new  HashMap<Integer, Hoelder>(0);
+		HashMap<Integer, Hoelder> parameter_ids = new HashMap<Integer, Hoelder>(0);
 		parameter_ids.put(hoelder.getHoelderID(), hoelder);
 		return parameter_ids;
 	}

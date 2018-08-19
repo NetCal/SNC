@@ -33,11 +33,7 @@ import java.util.Map;
  * 
  * @author Michael Beck
  */
-
 public abstract interface SymbolicFunction extends Serializable {
-
-	//Methods
-	
 	/**
 	 * Returns the value of the theta-dependent function at theta 
 	 * (theta must be the first of the parameters).
@@ -62,10 +58,7 @@ public abstract interface SymbolicFunction extends Serializable {
 	@Override
 	String toString();
 		
-	//Getter and Setter
-	
 	double getmaxTheta();
 	
     Map<Integer, Hoelder> getParameters();
-	
 }

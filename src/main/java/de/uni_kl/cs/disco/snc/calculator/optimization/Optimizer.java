@@ -47,43 +47,11 @@ public interface Optimizer {
     public double minimize(double thetagranularity, double hoeldergranularity) 
             throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 
-    /**
-     *
-     * @param input
-     * @param boundtype
-     * @param bound
-     * @param thetagranularity
-     * @param hoeldergranularity
-     * 
-     * @return
-     * 
-     * @throws ThetaOutOfBoundException
-     * @throws ParameterMismatchException
-     * @throws ServerOverloadException
-     * 
-     * @deprecated
-     */
     @Deprecated
     public double Bound(Arrival input, AbstractAnalysis.Boundtype boundtype, 
             double bound, double thetagranularity, double hoeldergranularity) 
             throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException;
 
-    /**
-     *
-     * @param input
-     * @param boundtype
-     * @param violation_probability
-     * @param thetagranularity
-     * @param hoeldergranularity
-     * 
-     * @return
-     * 
-     * @throws ThetaOutOfBoundException
-     * @throws ParameterMismatchException
-     * @throws ServerOverloadException
-     * 
-     * @deprecated
-     */
     @Deprecated
     public abstract double ReverseBound(Arrival input, AbstractAnalysis.Boundtype boundtype, 
             double violation_probability, double thetagranularity, double hoeldergranularity) 

@@ -45,12 +45,7 @@ import java.util.Map;
  *
  */
 public class MaximumFunction extends BinaryFunction implements SymbolicFunction{
-	
-	//Members
-
 	private static final long serialVersionUID = 8302274385750948237L;
-	
-	//Constructors
 	
 	/**
 	 * Constructs an <code>MaximumFunction</code> entity. If 
@@ -90,8 +85,6 @@ public class MaximumFunction extends BinaryFunction implements SymbolicFunction{
 	public MaximumFunction(SymbolicFunction first, SymbolicFunction second, Hoelder hoelder){
 	    super(first, second, hoelder);
 	}
-
-	//Methods
 	
 	/**
 	 * Calculates the value of the resulting function at theta 
@@ -115,24 +108,31 @@ public class MaximumFunction extends BinaryFunction implements SymbolicFunction{
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-	    if(checkForParameterMismatch(parameters))
-		throw new ParameterMismatchException("Total number of parameters does not match for atom functions");
-
+	    if(checkForParameterMismatch(parameters)) {
+	    	throw new ParameterMismatchException("Total number of parameters does not match for atom functions");
+	    }
+	    
 	    return Math.max(getValueOfFunction(theta, parameters, 1), getValueOfFunction(theta, parameters, 2));
 	}
 	
 	/**
 	 * Returns an representation of the function in polish notation.
 	 * That is: <code>max(f(t),g(t))</code>
+	 * 
 	 * @return a String representation of the function.
 	 */
 	@Override
 	public String toString(){
-		String output = "max("+first.toString()+","+second.toString()+")";
-		return output;
+		StringBuffer maxf_str = new StringBuffer();
+		
+		maxf_str.append("max(");
+		maxf_str.append(first.toString());
+		maxf_str.append(",");
+		maxf_str.append(second.toString());
+		maxf_str.append(")");
+		
+		return maxf_str.toString();
 	}
-
-	//Getter and Setter
 	
 	// FIXME Stray comment!?
 	/**
@@ -142,6 +142,7 @@ public class MaximumFunction extends BinaryFunction implements SymbolicFunction{
 	 * stochastically dependent one further parameter (the 
 	 * Hölder-coefficient) is needed to calculate the values of the
 	 * resulting function.
+	 * 
 	 * @return a list of parameterIDs.
 	 */
 }

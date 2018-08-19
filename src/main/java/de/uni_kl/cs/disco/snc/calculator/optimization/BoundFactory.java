@@ -30,7 +30,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
  * @author Sebastian Henningsen
  */
 public class BoundFactory {
-
     /**
      * Creates the bound which is specified by boundtype
      * 

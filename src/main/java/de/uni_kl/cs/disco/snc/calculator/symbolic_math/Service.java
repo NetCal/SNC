@@ -48,22 +48,19 @@ import de.uni_kl.cs.disco.utils.SetUtils;
  * <code>Servicedependencies</code>.
  * 
  * @author Michael Beck
+ * 
  * @see Analysis
  * @see SymbolicFunction
  */
 public class Service implements Serializable {
-	
-	//Members
-	
 	private static final long serialVersionUID = -3149240364532210267L;
+	
 	private double thetastar;
 	private SymbolicFunction rho;
 	private SymbolicFunction sigma;
 	private Set<Integer> Arrivaldependencies;
 	private Set<Integer> Servicedependencies;
 	private Network nw; // TODO: Maybe exchange this for Node/Flow later on
-	
-    //Constructor
 	
 	/**
 	 * Creates a <code>Service</code> instance, with  <code>rho
@@ -73,12 +70,14 @@ public class Service implements Serializable {
      * @param nw
 	 */	
 	public Service(Network nw){ 
+		this.nw = nw;
+		
 		rho = new ConstantFunction(0);
 		sigma = new ConstantFunction(0);
+		
 		thetastar = Math.min(rho.getmaxTheta(), sigma.getmaxTheta());
 		Arrivaldependencies = new HashSet<Integer>();
 		Servicedependencies = new HashSet<Integer>();
-                this.nw = nw;
 	}
 	
 	/**
@@ -93,12 +92,13 @@ public class Service implements Serializable {
 	 * @see SymbolicFunction
 	 */
 	public Service(SymbolicFunction sigma, SymbolicFunction rho, Network nw) {
-		this.rho = rho;
 		this.sigma = sigma;
+		this.rho = rho;
+		this.nw = nw;
+		
 		thetastar = Math.min(rho.getmaxTheta(), sigma.getmaxTheta());
 		Arrivaldependencies = new HashSet<Integer>();
 		Servicedependencies = new HashSet<Integer>();
-                this.nw = nw;
 	}
 	
 	/**
@@ -118,13 +118,14 @@ public class Service implements Serializable {
      * @param nw
 	 */
 	public Service(SymbolicFunction sigma, SymbolicFunction rho, int vertex_id, Network nw) {
-		this.rho = rho;
 		this.sigma = sigma;
+		this.rho = rho;
+		this.nw = nw;
+		
 		thetastar = Math.min(rho.getmaxTheta(), sigma.getmaxTheta());
 		Arrivaldependencies = new HashSet<Integer>();
 		Servicedependencies = new HashSet<Integer>();
 		Servicedependencies.add(vertex_id);
-                this.nw = nw;
 	}
 	
 	/**
@@ -291,14 +292,17 @@ public class Service implements Serializable {
 	 */
 	@Override
 	public String toString(){
-		String first = sigma.toString();
-		String second = rho.toString();
-		String output = "("+first+","+second+")";
-		return output;
+		StringBuffer service_str = new StringBuffer();
+		
+		service_str.append("(");
+		service_str.append(sigma.toString());
+		service_str.append(",");
+		service_str.append(rho.toString());
+		service_str.append(")");
+		
+		return service_str.toString();
 	}
 	
-	//Getter and Setter
-    	
 	public double getThetastar() {
 		return thetastar;
 	}

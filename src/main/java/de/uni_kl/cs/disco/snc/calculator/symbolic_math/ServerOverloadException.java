@@ -28,12 +28,7 @@ package de.uni_kl.cs.disco.snc.calculator.symbolic_math;
  * @author Michael Beck
  */
 public class ServerOverloadException extends Exception {
-	
-	//Members
-	
 	private static final long serialVersionUID = -3067169808121540318L;
-	
-	//Constructor
 	
 	public ServerOverloadException(String s){
 		super(s);
