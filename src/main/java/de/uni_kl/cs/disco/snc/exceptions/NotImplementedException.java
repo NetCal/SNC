@@ -24,7 +24,9 @@ package de.uni_kl.cs.disco.snc.exceptions;
  * @author Sebastian Henningsen
  */
 public class NotImplementedException extends RuntimeException {
-    private String message;
+	private static final long serialVersionUID = 1418048989883745128L;
+	
+	private String message;
     
     public NotImplementedException(String message) {
         this.message = message;

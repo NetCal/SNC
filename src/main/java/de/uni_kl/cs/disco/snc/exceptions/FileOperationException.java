@@ -24,8 +24,9 @@ package de.uni_kl.cs.disco.snc.exceptions;
  * @author Sebastian Henningsen
  */
 public class FileOperationException extends RuntimeException {
-
-    private String line;
+	private static final long serialVersionUID = 5637599930200059861L;
+	
+	private String line;
 
     public FileOperationException(Exception e) {
         super(e);
