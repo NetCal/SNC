@@ -81,9 +81,11 @@ public class SNC {
     private final int currentNetworkPosition;
 
     private SNC() {
-        networks = new ArrayList<>();
-        undoRedoStack = new UndoRedoStack();
-        networks.add(new Network());    // Create an initially empty Network
+    	undoRedoStack = new UndoRedoStack();
+
+    	// Create one initially empty network
+    	networks = new ArrayList<>();
+        networks.add(new Network());
         currentNetworkPosition = 0;
     }
 
@@ -117,7 +119,6 @@ public class SNC {
     public static void main(String[] args) throws InvocationTargetException, InterruptedException,
             ArrivalNotAvailableException, BadInitializationException, DeadlockException, ThetaOutOfBoundException,
             ParameterMismatchException, ServerOverloadException {
-
         final MainWindow main = new MainWindow();
 
         Runnable runnable = new Runnable() {
@@ -127,7 +128,6 @@ public class SNC {
             }
         };
         EventQueue.invokeLater(runnable);
-
     }
 
     /**
@@ -225,7 +225,7 @@ public class SNC {
      * @return the result of the analysis in arrival-representation.
      */
     public Arrival analyzeNetwork(Flow flow, Vertex vertex, AnalysisType anaType, BoundType boundtype, Network nw) {
-        //Preparations
+        // Preparations
         Arrival bound = null;
         File file = null;
         try {
