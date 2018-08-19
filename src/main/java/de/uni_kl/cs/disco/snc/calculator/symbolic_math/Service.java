@@ -56,10 +56,13 @@ public class Service implements Serializable {
 	private static final long serialVersionUID = -3149240364532210267L;
 	
 	private double thetastar;
+	
 	private SymbolicFunction rho;
 	private SymbolicFunction sigma;
+	
 	private Set<Integer> Arrivaldependencies;
 	private Set<Integer> Servicedependencies;
+	
 	private Network nw; // TODO: Maybe exchange this for Node/Flow later on
 	
 	/**

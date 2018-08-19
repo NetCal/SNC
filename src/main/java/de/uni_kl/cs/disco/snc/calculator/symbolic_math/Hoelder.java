@@ -27,6 +27,7 @@ import java.io.Serializable;
  */
 public class Hoelder implements Serializable {
 	private static final long serialVersionUID = 2169450349608663397L;
+	
 	private int hoelder_id;
 	private double p_value;
 	private double q_value;
