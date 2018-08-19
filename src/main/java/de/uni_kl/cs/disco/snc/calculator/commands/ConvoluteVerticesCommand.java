@@ -61,5 +61,4 @@ public class ConvoluteVerticesCommand implements Command {
         // TODO
         System.out.println("Undo Action for convolution not implemented yet.");
     }
-    
 }

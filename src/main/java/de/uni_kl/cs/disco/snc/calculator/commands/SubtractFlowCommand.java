@@ -22,6 +22,7 @@ package de.uni_kl.cs.disco.snc.calculator.commands;
 import de.uni_kl.cs.disco.snc.calculator.SNC;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
 import de.uni_kl.cs.disco.snc.calculator.network.NetworkActionException;
+import de.uni_kl.cs.disco.snc.exceptions.NotImplementedException;
 
 /**
  * Computes the left-over-service at the given vertex
@@ -61,5 +62,6 @@ public class SubtractFlowCommand implements Command {
     @Override
     public void undo() {
         // TODO
+    	throw new NotImplementedException("Undo Operation for SubtractFlowCommand not implemented yet.");
     }
 }

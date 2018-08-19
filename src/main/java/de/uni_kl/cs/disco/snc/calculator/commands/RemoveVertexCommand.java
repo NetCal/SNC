@@ -52,6 +52,7 @@ public class RemoveVertexCommand implements Command {
 
     @Override
     public void undo() {
+    	// TODO
     	throw new NotImplementedException("Undo Operation for RemoveVertexCommand not implemented yet.");
     }
 }
