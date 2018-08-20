@@ -31,7 +31,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * @author Sebastian Henningsen
  */
 public interface Optimizer {
-
     /**
      * Minimizes the @link Optimizable bound which is provided via the constructor of the specific algorithm.
      * 

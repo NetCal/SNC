@@ -31,6 +31,7 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  * Represents an inverse backlog bound for the given @link Arrival.
  * The arrival and a given violation probability are wrapped into this class which then
  * in turn can be optimized by the provided optimization techniques.
+ * 
  * @author Sebastian Henningsen
  * @author Michael Beck
  */

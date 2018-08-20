@@ -44,7 +44,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
  *
  */
 public class SimpleOptimizer extends AbstractOptimizer {
-
     /**
      * Creation is delegated to the @link AbstractOptimizer subclass.
      * 
