@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.uni_kl.cs.disco.snc.calculator.SNC;
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
