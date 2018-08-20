@@ -19,7 +19,6 @@
 
 package de.uni_kl.cs.disco.snc.calculator.optimization;
 
-import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
 import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.Arrival;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
