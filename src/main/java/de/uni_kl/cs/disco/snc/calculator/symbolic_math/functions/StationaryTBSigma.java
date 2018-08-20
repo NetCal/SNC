@@ -68,8 +68,6 @@ public class StationaryTBSigma implements SymbolicFunction {
 		this.maxTheta = maxTheta;
 	}
 	
-	//Methods
-
 	/**
 	 * Calculates the value of the resulting sigma-function at theta 
 	 * with given <code>parameters</code>.

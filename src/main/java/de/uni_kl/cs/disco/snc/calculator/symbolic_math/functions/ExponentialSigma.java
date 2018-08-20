@@ -70,7 +70,6 @@ public class ExponentialSigma implements SymbolicFunction{
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException {
-		
 		// Checks if only one parameter is given
 		if(parameters.size() != 0){
 			throw new ParameterMismatchException("exponentialsigma needs exactly one parameter");

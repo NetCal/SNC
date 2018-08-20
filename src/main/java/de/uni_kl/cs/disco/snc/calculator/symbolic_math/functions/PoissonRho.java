@@ -77,7 +77,6 @@ public class PoissonRho implements SymbolicFunction {
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
-
 		// Checks for a mismatch in number of given and needed parameters
 		if(parameters.size() != rhoParameters.size()) {
 			throw new ParameterMismatchException("Number of parameters does not match for atom functions (Poisson)");

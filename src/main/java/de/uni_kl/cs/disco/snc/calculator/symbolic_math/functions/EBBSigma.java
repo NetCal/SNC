@@ -78,7 +78,6 @@ public class EBBSigma implements SymbolicFunction {
 	@Override
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ServerOverloadException, ParameterMismatchException {
-
 		// Checks for a mismatch of given and needed parameters
 		if(parameters.size() != 0) throw new ParameterMismatchException("EBBFunction has only (modified) theta as parameters.");
 		
