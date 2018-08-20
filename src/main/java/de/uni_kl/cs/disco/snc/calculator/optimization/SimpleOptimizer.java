@@ -128,6 +128,7 @@ public class SimpleOptimizer extends AbstractOptimizer {
 	
 	            while(theta < maxTheta) {
 	                try {
+	                	// FIXME Return value of method without side effect is ignored
 	                    Math.min(optValue, bound.evaluate(theta));
 	                    theta = theta+thetagranularity;
 	                } catch(ServerOverloadException | ThetaOutOfBoundException e) {
