@@ -39,8 +39,9 @@ import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
 public class MenuActions {
 
     static class LoadNetworkAction extends AbstractAction {
+		private static final long serialVersionUID = 5419414321911801027L;
 
-        public LoadNetworkAction(String name) {
+		public LoadNetworkAction(String name) {
             super(name);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                     KeyEvent.VK_O, ActionEvent.CTRL_MASK));
@@ -61,8 +62,9 @@ public class MenuActions {
     }
 
     static class SaveNetworkAction extends AbstractAction {
+		private static final long serialVersionUID = -5063787348101172347L;
 
-        public SaveNetworkAction(String name) {
+		public SaveNetworkAction(String name) {
             super(name);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                     KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -84,8 +86,8 @@ public class MenuActions {
     }
 
     static class ExitAction extends AbstractAction {
-
-        MainWindow gui;
+		private static final long serialVersionUID = -7387004331638165723L;
+		MainWindow gui;
 
         public ExitAction(String name, MainWindow gui) {
             super(name);
@@ -99,8 +101,9 @@ public class MenuActions {
     }
 
     static class UndoAction extends AbstractAction {
+		private static final long serialVersionUID = -6744965593660744594L;
 
-        public UndoAction(String name) {
+		public UndoAction(String name) {
             super(name);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                     KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
@@ -114,8 +117,9 @@ public class MenuActions {
     }
 
     static class RedoAction extends AbstractAction {
+		private static final long serialVersionUID = -2511809113244570935L;
 
-        public RedoAction(String name) {
+		public RedoAction(String name) {
             super(name);
             this.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                     KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
@@ -130,8 +134,9 @@ public class MenuActions {
     }
 
     static class AboutAction extends AbstractAction {
+		private static final long serialVersionUID = -8883999926065504588L;
 
-        public AboutAction(String name) {
+		public AboutAction(String name) {
             super(name);
         }
 
