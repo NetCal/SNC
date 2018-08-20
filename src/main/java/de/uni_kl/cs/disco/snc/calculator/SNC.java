@@ -28,8 +28,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import de.uni_kl.cs.disco.snc.calculator.analysis.AbstractAnalysis;
 import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisException;
@@ -38,10 +36,7 @@ import de.uni_kl.cs.disco.snc.calculator.analysis.AnalysisType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.Analyzer;
 import de.uni_kl.cs.disco.snc.calculator.analysis.BoundType;
 import de.uni_kl.cs.disco.snc.calculator.analysis.DeadlockException;
-import de.uni_kl.cs.disco.snc.calculator.commands.AddFlowCommand;
-import de.uni_kl.cs.disco.snc.calculator.commands.AddVertexCommand;
 import de.uni_kl.cs.disco.snc.calculator.commands.Command;
-import de.uni_kl.cs.disco.snc.calculator.commands.ConvolveVerticesCommand;
 import de.uni_kl.cs.disco.snc.calculator.gui.MainWindow;
 import de.uni_kl.cs.disco.snc.calculator.network.ArrivalNotAvailableException;
 import de.uni_kl.cs.disco.snc.calculator.network.Flow;
@@ -58,7 +53,6 @@ import de.uni_kl.cs.disco.snc.calculator.symbolic_math.BadInitializationExceptio
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ParameterMismatchException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ServerOverloadException;
 import de.uni_kl.cs.disco.snc.calculator.symbolic_math.ThetaOutOfBoundException;
-import de.uni_kl.cs.disco.snc.calculator.symbolic_math.functions.ConstantFunction;
 import de.uni_kl.cs.disco.snc.exceptions.FileOperationException;
 
 /**
@@ -318,38 +312,5 @@ public class SNC {
             throw new AnalysisException("No such boundtype");
         }
         return targetBoundType;
-    }
-
-    // Temp:
-    private void ConvolutionTest() {
-        System.out.println("Convolution Test:");
-        Network nw = getCurrentNetwork();
-        Command addV1 = new AddVertexCommand("V1", -2.0, -1, SNC.getInstance());
-        Command addV2 = new AddVertexCommand("V2", -1.0, -1, SNC.getInstance());
-        List<Integer> f1Route = new ArrayList<>();
-        List<Integer> f1Prio = new ArrayList<>();
-        f1Route.add(1);
-        f1Route.add(2);
-        f1Prio.add(1);
-        f1Prio.add(1);
-        Arrival arrival = new Arrival(new ConstantFunction(0), new ConstantFunction(0.5), nw);
-        Command addF1 = new AddFlowCommand("F1", arrival, f1Route, f1Prio, -1, SNC.getInstance());
-        //Command convV1V2 = new ConvolveVerticesCommand(1, 2, -1, SNC.getInstance());
-        invokeCommand(addV1);
-        invokeCommand(addV2);
-        invokeCommand(addF1);
-        //invokeCommand(convV1V2);
-
-        Map<Integer, Vertex> vertices = nw.getVertices();
-        Map<Integer, Flow> flows = nw.getFlows();
-        System.out.println("Flows");
-        for (Entry<Integer, Flow> entry : flows.entrySet()) {
-            System.out.print(entry.getValue().getAlias() + ": " + entry.getValue().getVerticeIDs());
-        }
-        
-        System.out.println("\nVertices");
-        for (Entry<Integer, Vertex> entry : vertices.entrySet()) {
-            System.out.print(entry.getKey() + " " + entry.getValue().getAlias() + " ");
-        }
     }
 }
