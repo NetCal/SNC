@@ -20,8 +20,6 @@
 package de.uni_kl.cs.disco.utils;
 
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -114,19 +112,4 @@ public class SetUtils {
     	}
     	return result;
     }
-    
-    /**
-     * Creates a map containing each element of the <code>Set set</code> as key
-     * and the <coded>Object value</code> as corresponding value.
-     * @param set the set whose elements will be the keys of entries in the map
-     * @param value the value of each of the map's entries
-     * @return a map
-     */
-//    public static Map createMap(Set set, Object value) {
-//    	Map map = new HashMap(set.size());
-//    	for (Iterator iter = set.iterator(); iter.hasNext(); ) {
-//    		map.put(iter.next(), value);
-//    	}
-//    	return map;
-//    }
 }
