@@ -34,11 +34,9 @@ public class UnitaryMinus implements SymbolicFunction {
 	private static final long serialVersionUID = -2771266779998109455L;
 	
 	private SymbolicFunction atom;
-	private Map<Integer,Hoelder> parameters;
 	
 	public UnitaryMinus(SymbolicFunction atom){
 		this.atom = atom;
-		parameters = atom.getParameters();
 	}
 
 	@Override
