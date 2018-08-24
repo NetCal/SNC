@@ -30,3 +30,20 @@ In order to execute the `jar`-file, locate it in your output folder, open a comm
 java -jar DiscoSNC-${version}-jar-with-dependencies.jar
 ```
 (Don't forget to replace `${version}` with the one you located in pom.xml).
+
+### Academic Attribution
+
+If you use the Disco Stochastic Network Calculator for research, please include the following reference in any resulting publication:
+
+```plain
+@inproceedings{DiscoSNCv1,
+  author    = {Michael A. Beck and Jens B. Schmitt},
+  title     = {The {DISCO} Stochastic Network Calculator Version 1.0 -- When Waiting Comes to an End},
+  booktitle = {Proc. of the International Conference on Performance Evaluation Methodologies and Tools},
+  series    = {ValueTools '13},
+  pages     = {282--285},
+  month     = {December},
+  year      = 2013,
+  url       = {https://dl.acm.org/citation.cfm?id=2631878}
+}
+```
