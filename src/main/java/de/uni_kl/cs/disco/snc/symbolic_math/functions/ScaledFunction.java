@@ -102,6 +102,7 @@ public class ScaledFunction implements SymbolicFunction {
 	 * <code>parameters</code>. It is important to note that the 
 	 * last entry in <code>parameters</code> is the parameter, 
 	 * which is used for scaling theta.
+	 * 
      * @param theta
 	 * @param parameters contains the needed parameters (including
 	 * theta, as first entry). The last entry in parameters gives
@@ -118,13 +119,13 @@ public class ScaledFunction implements SymbolicFunction {
 	public double getValue(double theta, Map<Integer, Hoelder> parameters)
 			throws ThetaOutOfBoundException, ParameterMismatchException, ServerOverloadException {
 		
-		//Checks if number of given and needed parameters matches
-		if(parameters.size() != original.getParameters().size()+1 && !original.getParameters().containsKey(hoelder)
-				|| parameters.size() != original.getParameters().size() && original.getParameters().containsKey(hoelder)){
+		// Checks if number of given and needed parameters matches
+		if(parameters.size() != original.getParameters().size()+1 && !original.getParameters().containsValue(hoelder)
+				|| parameters.size() != original.getParameters().size() && original.getParameters().containsValue(hoelder)){
 			throw new ParameterMismatchException("Number of parameters for scaled function does not match");
 		}
 		
-		//Constructs the parameter-array needed for calculating the scaled atom-function
+		// Constructs the parameter-array needed for calculating the scaled atom-function
 		HashMap<Integer, Hoelder> givenparameters = new HashMap<Integer, Hoelder>(0);
 		
 		for(Map.Entry<Integer, Hoelder> entry : original.getParameters().entrySet()){
@@ -132,7 +133,7 @@ public class ScaledFunction implements SymbolicFunction {
 			else throw new ParameterMismatchException("Needed hoelder_id is not found in given parameters.");
 		}
 		
-		//Scales theta
+		// Scales theta
 		if(p_scale)	theta = theta*parameters.get(hoelder.getHoelderID()).getPValue();
 		else theta = theta*parameters.get(hoelder.getHoelderID()).getQValue();
 
