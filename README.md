@@ -51,7 +51,7 @@ If you use the Stochastic Network Calculator for research, please include at lea
 ```
 
 ```plain
-@inproceedings{SNCv2,
+@article{SNCv2,
   author    = {Michael A. Beck and Sebastian A. Henningsen},
   title     = {Technical Report The Stochastic Network Calculator},
   journal   = {CoRR},
