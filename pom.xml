@@ -81,7 +81,7 @@
 				</descriptorRefs>
 				<archive>
 				  <manifest>
-					<mainClass>org.networkcalculus.snc.calculator.SNC</mainClass>
+					<mainClass>org.networkcalculus.snc.SNC</mainClass>
 				  </manifest>
 				</archive>
 			</configuration>
